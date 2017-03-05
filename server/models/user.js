@@ -7,8 +7,7 @@ const bcrypt = require ('bcryptjs');
 var UserSchema = mongoose.Schema({
 	username: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	password: {
 		type: String,
@@ -19,17 +18,32 @@ var UserSchema = mongoose.Schema({
 // define the model User to be added in the database
 var User = module.exports = mongoose.model('User', UserSchema);
 
-// hash the password when creating a new user in the database
-module.exports.createUser = function(newUser, callback) {
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
-            // store hash
-            newUser.password = hash;
-            newUser.save(callback); // the callback of save is a function(err, user)
-        });
-    });
-}
+/*
+	CREATE ADMIN ACCOUNT
+*/
+var adminUser = new User({
+	username: 'admin',
+	password: 'admin'
+});
 
+createUser(adminUser, function (aux1, aux2) {
+	// do nothing
+});
+
+/*
+	Create new User in the system
+*/
+// hash the password when creating a new user in the database
+function createUser(newUser, callback) {
+	bcrypt.genSalt(10, function(err, salt) {
+		  bcrypt.hash(newUser.password, salt, function(err, hash) {
+			  // store hash
+			  newUser.password = hash;
+			  newUser.save(callback); // the callback of save is a function(err, user)
+	  	  });
+	});
+}
+module.exports.createUser = createUser;
 
 module.exports.getUserByUsername = function(username, callback) {
 	User.findOne({

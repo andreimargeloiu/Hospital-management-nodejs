@@ -2548,7 +2548,7 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
+  width: 40%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;

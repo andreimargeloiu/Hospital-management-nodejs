@@ -84,10 +84,26 @@ app.use(function (req, res, next) {
 /*
     Website routes
 */
-var routes = require('./routes/index');
+var login = require('./routes/login');
 var users = require('./routes/users');
-app.use('/', routes);
-app.use('/users', users);
+var appRoute = require('./routes/app');
+
+/*
+    Ensure authetification
+*/
+app.use('/app', (req, res, next) => {
+    // check to be authentificated
+    if (req.isAuthenticated()) { // if yes, continue
+        return next();
+    } else {                     // if no, login
+        // req.flash('error_msg', 'You are not logged in');
+        res.redirect('/');
+    }
+});
+
+app.use('/', login);
+app.use('/', appRoute);
+app.use('/', users);
 
 /*
     Fire the server online
