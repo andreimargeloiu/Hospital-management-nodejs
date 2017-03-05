@@ -37,7 +37,7 @@ router.post('/app/adduser', (req, res) => {
 
         User.createUser(newUser, function(err, user) {
             if (err) {
-                throw err;
+                return ;
             }
         });
 

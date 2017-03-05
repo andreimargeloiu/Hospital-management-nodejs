@@ -3,9 +3,13 @@
     Select patient diseases:
 </p>
 <form action="/app/addpatient" method="post">
-  <input type="checkbox" name="d0" >Adenovirus<br>
-  <input type="checkbox" name="d1" >Campylobacter<br>
-  <input type="checkbox" name="d2" >CJD<br>
-  <input type="checkbox" name="d3" >Cryptococcus<br>
+  <input type="checkbox" name="PD[]" value="Adenovirus" >Adenovirus  -- 20<br>
+  <input type="checkbox" name="PD[]" value="Campylobacter" >Campylobacter  -- 10<br>
+  <input type="checkbox" name="PD[]" value="CJD" >CJD -- 10<br>
+  <input type="checkbox" name="PD[]" value="Cryptococcus" >Cryptococcus -- 5<br>
   <input type="submit" value="Submit">
+
+  {{#if score}}
+    <p>The score is {{score}}</p>
+  {{/if}}
 </form>

@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 const path = require('path');
+const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const expressValidator = require('express-validator');
@@ -22,6 +23,7 @@ var app = express();
 // app.use([path,] callback [, callback...]) -> puts middleware fot the app
 app.use(express.static(__dirname + '/views'));
 app.use(express.static(__dirname + '/public'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.engine('.extenionName', renderingEngine) -> renders files
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 // app.set('view engine', 'engineToUse') -> sets default viewing engine
@@ -31,7 +33,7 @@ app.set('view engine', 'handlebars');
     Bodyparser Middleware + Express session
 */
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 // session -> keep the user loggin after he login in on the website
 //         -> creates an object req.session, where you can add properties
@@ -91,19 +93,23 @@ var appRoute = require('./routes/app');
 /*
     Ensure authetification
 */
-app.use('/app', (req, res, next) => {
-    // check to be authentificated
-    if (req.isAuthenticated()) { // if yes, continue
-        return next();
-    } else {                     // if no, login
-        // req.flash('error_msg', 'You are not logged in');
-        res.redirect('/');
-    }
-});
+// app.use('/app', (req, res, next) => {
+//     // check to be authentificated
+//     if (req.isAuthenticated()) { // if yes, continue
+//         return next();
+//     } else {                     // if no, login
+//         // req.flash('error_msg', 'You are not logged in');
+//         res.redirect('/');
+//     }
+// });
 
 app.use('/', login);
 app.use('/', appRoute);
 app.use('/', users);
+app.get('/test', (req, res) => {
+    res.render('test', {layout: false});
+});
+
 
 /*
     Fire the server online
