@@ -14,7 +14,7 @@ router.get('/register', function(req, res) {
 
 // GET Login page
 router.get('/login', function(req, res) {
-    res.render('login');
+    res.render('login', {layout: false});
 });
 
 // POST Register User -> when the form get submitted
