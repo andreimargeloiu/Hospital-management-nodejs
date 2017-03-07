@@ -89,6 +89,7 @@ app.use(function (req, res, next) {
 var login = require('./routes/login');
 var users = require('./routes/users');
 var appRoute = require('./routes/app');
+var patients = require('./routes/patients');
 
 /*
     Ensure authetification
@@ -106,9 +107,14 @@ var appRoute = require('./routes/app');
 app.use('/', login);
 app.use('/', appRoute);
 app.use('/', users);
+app.use('/', patients);
 app.get('/test', (req, res) => {
     res.render('test', {layout: false});
 });
+app.get('/testjquery', (req, res) => {
+    res.render('testjquery', {layout: false});
+});
+
 
 
 /*

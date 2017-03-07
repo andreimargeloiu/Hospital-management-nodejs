@@ -1,15 +1,32 @@
-<h2 class="page-header">Create new patient</h2>
-<p>
-    Select patient diseases:
-</p>
-<form action="/app/addpatient" method="post">
-  <input type="checkbox" name="PD[]" value="Adenovirus" >Adenovirus  -- 20<br>
-  <input type="checkbox" name="PD[]" value="Campylobacter" >Campylobacter  -- 10<br>
-  <input type="checkbox" name="PD[]" value="CJD" >CJD -- 10<br>
-  <input type="checkbox" name="PD[]" value="Cryptococcus" >Cryptococcus -- 5<br>
-  <input type="submit" value="Submit">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="dashboard.js"></script>
 
-  {{#if score}}
-    <p>The score is {{score}}</p>
-  {{/if}}
-</form>
+
+<h2 class="page-header">Create new patient</h2>
+
+<div id="show-diseases-form">
+    <p>
+        Select patient diseases:
+    </p>
+
+    {{#if score}}
+        <p>Score is {{score}}</p>
+    {{/if}}
+</div>
+
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Disease</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric" >Laminate (Gold on Blue)</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+'<input type="checkbox" name="PD[]" value="' + prop + '" >' + prop + '   ---   ' + data[prop] + '<br>'

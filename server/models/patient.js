@@ -3,6 +3,11 @@ var scoreOfDisease = require('./diseases.js');
 
 // User Schema
 var PatientSchema = mongoose.Schema({
+	name: {
+		type: String,
+		default: "Annette Jeanes",
+		required: true
+	},
 	diseases: {
         type: Array,
         default: []
@@ -24,6 +29,8 @@ PatientSchema.methods.computeScore = function () {
         }
     patient.score = score;
 }
+
+
 
 var Patient = mongoose.model('Patient', PatientSchema);
 
