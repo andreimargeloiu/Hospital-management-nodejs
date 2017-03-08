@@ -1,3 +1,6 @@
+// POST /app/adduser -> add a new user into the app
+// GET /logout       -> log the user out of the system
+
 const express = require('express');
 const router = express.Router();
 const passport = require ('passport');

@@ -1,3 +1,6 @@
+// GET /app -> go the the dashboard
+// GET /app/getdiseases -> return JSON with all diseases in the system
+
 const express = require('express');
 const router = express.Router();
 

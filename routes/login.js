@@ -1,3 +1,6 @@
+// POST /login -> authentificate in the system
+// GET /       -> get to the login page
+
 const express = require('express');
 const router = express.Router();
 const passport = require ('passport');

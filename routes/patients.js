@@ -1,3 +1,7 @@
+// POST app/addpatient       -> add a patient in the database
+// GET app/getpatients       -> get a JSON with all patients
+// GET app/getpatient/:id    -> get one patience data
+
 const express = require('express');
 const router = express.Router();
 
@@ -10,19 +14,17 @@ const {ObjectID} = require('mongodb');
 router.post('/app/addpatient', (req, res) => {
     // receive the form data in the array PD, each element being a String with the disease name
     var PD = req.body.PD; // PD = patient diseases
-    console.log(req.body.PD);
 
     // make a new patient and add it in the database
     var patient = Patient({
         diseases: PD
     });
+
     patient.computeScore();
-    console.log(JSON.stringify(patient, undefined, 2));
     patient.save(function(err, patient) {
         if (err) {
-            return;
+            res.status(400).send();
         }
-        console.log(patient);
     });
 
     res.render('dashboard', {
@@ -38,6 +40,9 @@ router.get('/app/getpatients', (req, res) => {
     });
 });
 
+/*
+    GET one patient data -> for his personal page
+*/
 router.get('/app/getpatient/:id', (req, res) => {
     ID = console.log(req.params.id);
     Patient.findOne(ID).then((patient) => {

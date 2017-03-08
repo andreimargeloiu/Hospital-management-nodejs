@@ -5,6 +5,7 @@ scoreOfDisease["Adenovirus"] = 20;
 scoreOfDisease['Campylobacter'] = 10;
 scoreOfDisease['CJD'] = 10;
 scoreOfDisease['Cryptococcus'] = 5;
+scoreOfDisease['Flu'] = 5;
 
 // console.log(JSON.stringify(diseases, undefined, 2));
 //

@@ -31,7 +31,6 @@ PatientSchema.methods.computeScore = function () {
 }
 
 
-
 var Patient = mongoose.model('Patient', PatientSchema);
 
 module.exports = {Patient};
