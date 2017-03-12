@@ -8,6 +8,11 @@ const router = express.Router();
 var scoreOfDisease = require('./../server/models/diseases.js');
 var {Patient} = require('./../server/models/patient.js');
 const {ObjectID} = require('mongodb');
+
+router.get('/glebpatients', (req, res) => {
+    res.render('patients');
+});
+
 /*
     POST /addPatient -> adds new patient
 */

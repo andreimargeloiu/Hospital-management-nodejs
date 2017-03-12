@@ -1,5 +1,4 @@
 #myInput {
-
     background-image: url('/css/searchicon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -53,9 +52,6 @@
     border-radius: 5px;
     background-color: #f6f6f6;
     margin-top: 3%;
-    margin-left: 27.5%;
-
-
 }
 
 #score{
@@ -64,11 +60,10 @@
     background-color: #f6f6f6;
     width: 20%;
     border-radius: 5px;
-    margin-top: 5%;
+    margin-top: 1%;
     margin-left: 40%;
     margin-right: 40%;
     margin-bottom: -5px;
-
 }
 
 
@@ -92,7 +87,8 @@ body{
     margin-top: 4%;
     margin-left: 15%;
     width:70%;
-    box-shadow: 2px 2px 2px 2px black;
+    border: 1px solid;
+    border-radius: 5px;
     background-color: rgba(246,246,246,0.5);
 
 }
@@ -108,11 +104,6 @@ input[type="text"], textarea {
 
 
 .submitButton{
-    position: fixed;
-     top:18em;
-     left:69%;
-
-
-
-
+    top:18em;
+    left:69%;
 }

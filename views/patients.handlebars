@@ -1,57 +1,56 @@
-<html>
+<script type="text/javascript" src="js/patientView.js"></script>
+<link rel="stylesheet" href="/css/patientView.css">
+
+
 <div id="score">
-			<p><strong>Score: 25</strong></p>
-		</div>
+	<p><strong>Score: 25</strong></p>
+</div>
 
 		<form id="theForm" method="post" class="theForm" >
-
-			<div class="enterDetails form-group">
-				<p><label for="name">  Name:</label>
-				<input type="text" id="Name" ></p>
-				<label for="patientNumber" >  NHS number:</label>
-				<input type="text" id="Name">
-			</div>
-
-
+			<center>
+				<div class="enterDetails form-group">
+					<p><label for="name">  Name:</label>
+					<input type="text" id="Name" ></p>
+					<label for="patientNumber" >  NHS number:</label>
+					<input type="text" id="Name">
+				</div>
+			</center>
 
 		    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for infection">
-
-
 					<ul id="myUL">
-					  <li><a class="header">A</a></li>
-					  <li><a > <input class="checkboxes" type="checkbox"> Anthrax </a></a></li>
+					  <li><a class="headerLetterForm header">A</a></li>
+					  <li><a> <input class="checkboxes" type="checkbox"> Anthrax </a></a></li>
 
 
-					  <li><a class="header">B</a> </li>
+					  <li><a class="headerLetterForm header">B</a> </li>
 					  <li><a> <input class="checkboxes" type="checkbox">BK virus </a></li>
 
 
-					  <li><a class="header">C</a></li>
+					  <li><a class="headerLetterForm header">C</a></li>
 					  <li><a> <input class="checkboxes" type="checkbox">Cholera </a></a></li>
 					  <li><a> <input class="checkboxes" type="checkbox">Chicken Pox </a></a></li>
 
-					    <li><a class="header">D</a></li>
+					    <li><a class="headerLetterForm header">D</a></li>
 					  <li><a > <input class="checkboxes" type="checkbox">Denis</a></a></li>
 
 
-					  <li><a class="header">E</a> </li>
+					  <li><a class="headerLetterForm header">E</a> </li>
 					  <li><a> <input class="checkboxes" type="checkbox">Elena</a></li>
 
 
-					  <li><a class="header">F</a></li>
+					  <li><a class="headerLetterForm header">F</a></li>
 					  <li><a> <input class="checkboxes" type="checkbox">Felix </a></a></li>
 					  <li><a> <input class="checkboxes" type="checkbox">Fiona</a></a></li>
 
 					</ul>
 
 
-					<!-- <button class="submitButton btn btn-danger">Submit</button> -->
-				<button class="submitButton btn btn-danger">Submit</button>
+				<!-- <button class="submitButton btn btn-danger">Submit</button> -->
+				<!--  -->
+				<br>
+				<center>
+					<input class="btn btn-danger submitbutton" type="submit" value="Submit">
 
-			
+				</center>
+
 		</form>
-
-
-
-	</body>
-</html>

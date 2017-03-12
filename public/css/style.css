@@ -14,7 +14,7 @@ body {
 
 /* Custom page header */
 .header {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #e5e5e5;
 }
 /* Make the masthead heading the same height as the navigation */
@@ -70,12 +70,16 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.headerLetterForm {
+    margin-bottom: 0px !important;
 }
 
 .page-header {
