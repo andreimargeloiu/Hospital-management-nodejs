@@ -22,7 +22,7 @@ var {mongoose} = require('./server/db/mongoose.js');
 var app = express();
 // app.use([path,] callback [, callback...]) -> puts middleware fot the app
 app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.engine('.extenionName', renderingEngine) -> renders files
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -108,13 +108,6 @@ app.use('/', login);
 app.use('/', appRoute);
 app.use('/', users);
 app.use('/', patients);
-app.get('/test', (req, res) => {
-    res.render('test', {layout: false});
-});
-app.get('/testjquery', (req, res) => {
-    res.render('testjquery', {layout: false});
-});
-
 
 
 /*

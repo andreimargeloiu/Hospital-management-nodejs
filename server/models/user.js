@@ -1,4 +1,8 @@
-// define the model for the users in the database
+/*
+ 	Define the authentification system and the user model.
+
+	***Password are stored encrypted using Bcrypt algorithm.
+*/
 
 const mongoose = require ('mongoose');
 const bcrypt = require ('bcryptjs');
@@ -26,10 +30,10 @@ var adminUser = new User({
 	username: 'admin',
 	password: 'admin'
 });
-
 createUser(adminUser, function (aux1, aux2) {
 	// do nothing
 });
+
 
 /*
 	Create new User in the system

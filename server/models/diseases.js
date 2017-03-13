@@ -2,9 +2,14 @@
 var scoreOfDisease = {}; // empty map
 
 scoreOfDisease["Adenovirus"] = 20;
+scoreOfDisease['Anthrax'] = 50;
+scoreOfDisease['BK virus'] = 40;
 scoreOfDisease['Campylobacter'] = 10;
+scoreOfDisease['Chicken Pox'] = 70;
 scoreOfDisease['CJD'] = 10;
 scoreOfDisease['Cryptococcus'] = 5;
+
+
 
 // console.log(JSON.stringify(diseases, undefined, 2));
 //

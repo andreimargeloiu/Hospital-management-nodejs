@@ -8,6 +8,14 @@ var PatientSchema = mongoose.Schema({
 		default: "Annette Jeanes",
 		required: true
 	},
+	dateOfBirth: {
+		type: Date,
+		required: true
+	},
+	NHSnumber: {
+		type: String,
+		required: true,
+	},
 	diseases: {
         type: Array,
         default: []
@@ -15,9 +23,16 @@ var PatientSchema = mongoose.Schema({
     score: {
         type: Number,
         default: 0
-    }
+    },
+	room: {
+		type: String,
+		default: 'No room'
+	}
 });
 
+/*
+	Method to compute the score of a patient
+*/
 PatientSchema.methods.computeScore = function () {
     var patient = this;
     var score = 0;
@@ -32,5 +47,4 @@ PatientSchema.methods.computeScore = function () {
 
 
 var Patient = mongoose.model('Patient', PatientSchema);
-
 module.exports = {Patient};

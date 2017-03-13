@@ -1409,7 +1409,7 @@ a.bg-danger:focus {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
+  margin: 35px 0 15px;
   border-bottom: 1px solid #eee;
 }
 ul,
@@ -4271,7 +4271,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 0;
   border-width: 1px 0 0;
 }
-.navbar-brand {
+.navbar-brand>img {
+  float: left;
+  height: 50px;
+  padding: 0px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.navbar-brand>{
   float: left;
   height: 50px;
   padding: 15px 15px;
