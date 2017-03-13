@@ -5,7 +5,7 @@ $(document).ready(function () {
               action:'/app/addpatient',
               method: 'post'
           });
-          
+
           for (var prop in data) {
               if (data.hasOwnProperty(prop)) {
                   form.append('<input type="checkbox" name="PD[]" value="' + prop + '" >' + prop + '   ---   ' + data[prop] + '<br>');
