@@ -10,11 +10,18 @@ var PatientSchema = mongoose.Schema({
 	},
 	dateOfBirth: {
 		type: Date,
-		required: true
+		required: true,
+		default: Date(2017, 3, 17, 19, 21)
+	},
+	sex: {
+		type: Boolean,
+		required: true,
+		default: true
 	},
 	NHSnumber: {
 		type: String,
 		required: true,
+		default: 'no number yet'
 	},
 	diseases: {
         type: Array,
@@ -27,6 +34,10 @@ var PatientSchema = mongoose.Schema({
 	room: {
 		type: String,
 		default: 'No room'
+	},
+	updated: {
+		type: Date,
+		default: Date(2017, 3, 17, 19, 21)
 	}
 });
 
