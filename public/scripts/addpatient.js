@@ -1,4 +1,4 @@
-$(document).ready(function () {
+ $(document).ready(function () {
       var flickerAPI = "http://localhost:3000/app/getdiseases";
       $.getJSON(flickerAPI).done(function(data) {
           

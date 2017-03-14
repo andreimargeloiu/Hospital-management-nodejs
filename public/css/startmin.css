@@ -21,7 +21,7 @@ body {
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
-        margin-left: 250px;
+        margin-left: 200px; /*Changed from 250*/
         padding: 30px 30px 0 30px;
         border-left: 1px solid #e7e7e7;
     }
@@ -152,7 +152,7 @@ body {
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 250px;
+        width: 200px; /*Changed from 250px*/
         margin-top: 51px;
     }
 
