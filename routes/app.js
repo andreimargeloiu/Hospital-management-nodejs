@@ -12,7 +12,7 @@ var {Patient} = require('./../server/models/patient.js');
     GET /app/ -> simply render the page
 */
 router.get('/app', (req, res) => {
-    res.render('dashboard', {pageTitle: "Dashboard"});
+    res.render('dashboard', {patientsInRooms: "20", freeRooms: "10", patientsWaiting: "30"});
 });
 
 router.get('/app/settings', (req, res) => {

@@ -2,9 +2,9 @@ $(document).ready(function () {
 
       var flickerAPI = "http://localhost:3000/app/getpatients";
       $.getJSON(flickerAPI).done(function(patients) {
-      	
+
       	// console.log(patients[0]);
-      	
+
       	var patientsArray = [];
 
       	for (var i = 0; i < patients.length; ++i) {
@@ -18,7 +18,7 @@ $(document).ready(function () {
 
       		console.log(patientArray);
 
-      		patientsArray.push(patientArray); 
+      		patientsArray.push(patientArray);
       	}
 
       	console.log(patientsArray);
@@ -49,5 +49,5 @@ $(document).ready(function () {
 	        scrollCollapse: true,
 	        paging:         false
    		} );
-	} ); 
+	} );
 } );
