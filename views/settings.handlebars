@@ -1,18 +1,23 @@
-<div class="">
-    <h2 class="page-header">Add new user that can use the application</h2>
-    <p>Just the admin accoount can add users.</p>
-    <div>
-        <form method="post" action="/app/adduser" center="true">
-          <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" placeholder="Username" name="username">
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password" name="password">
-          </div>
-          <p></p>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
+<div class="row">
+	<div class="col-sm-6 col-md-6 col-lg-6">
+		<h3>Add new user </h3>
+	    <p>Just the admin account can add users.</p>
+	    <div>
+	        <form method="post" action="/app/adduser" center="true">
+				<div class="form-group row">
+   	             	<label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Username</label>
+   	             	<div class="col-sm-10 col-md-10 col-lg-10">
+   	                 	<input class="form-control" style="width: 100%;" type="text" name="username" placeholder="Enter username...">
+   	             	</div>
+   	         	</div>
+				<div class="form-group row">
+   				 	<label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Password</label>
+   				 	<div class="col-sm-10 col-md-10 col-lg-10">
+   					 	<input class="form-control" style="width: 100%;" type="password" name="password" placeholder="Enter password...">
+   				 	</div>
+   			 	</div>
+	          	<button type="submit" style="float: right;" class="btn btn-primary">Submit</button>
+	        </form>
+	    </div>
+	</div>
 </div>

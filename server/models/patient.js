@@ -1,27 +1,28 @@
 const mongoose = require ('mongoose');
 var scoreOfDisease = require('./diseases.js');
+var rooms = require('./rooms.js');
 
 // User Schema
 var PatientSchema = mongoose.Schema({
-	name: {
+	firstName: {
 		type: String,
-		default: "Annette Jeanes",
-		required: true
+		default: "No first name"
+	},
+	lastName: {
+		type: String,
+		default: "No last name"
 	},
 	dateOfBirth: {
 		type: Date,
-		required: true,
 		default: Date(2017, 3, 17, 19, 21)
 	},
 	sex: {
-		type: Boolean,
-		required: true,
-		default: true
+		type: String,
+		default: "male"
 	},
 	NHSnumber: {
 		type: String,
-		required: true,
-		default: 'no number yet'
+		default: '134574806'
 	},
 	diseases: {
         type: Array,
@@ -33,7 +34,7 @@ var PatientSchema = mongoose.Schema({
     },
 	room: {
 		type: String,
-		default: 'No room'
+		default: 'no room'
 	},
 	updated: {
 		type: Date,
@@ -42,20 +43,22 @@ var PatientSchema = mongoose.Schema({
 });
 
 /*
-	Method to compute the score of a patient
+	Compute the score of a patient
 */
-PatientSchema.methods.computeScore = function () {
-    var patient = this;
+function computeScore(arrayDiseases) {
     var score = 0;
-    for (var i = 0; i<patient.diseases.length; ++i) {
-        if (scoreOfDisease.hasOwnProperty(patient.diseases[i]))
-            if (scoreOfDisease[patient.diseases[i]] > score) {
-                score = scoreOfDisease[patient.diseases[i]];
-            }
-        }
-    patient.score = score;
+	if (arrayDiseases !== null && arrayDiseases !== undefined) {
+		if (arrayDiseases instanceof Array) {
+			for (var i = 0; i<arrayDiseases.length; ++i) {
+				if (scoreOfDisease[arrayDiseases[i]] > score) {
+					score = scoreOfDisease[arrayDiseases[i]];
+				}
+			}
+		}
+	}
+
+    return score;
 }
 
-
 var Patient = mongoose.model('Patient', PatientSchema);
-module.exports = {Patient};
+module.exports = {Patient, computeScore};

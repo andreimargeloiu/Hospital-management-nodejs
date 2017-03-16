@@ -22,7 +22,7 @@ body {
     #page-wrapper {
         position: inherit;
         margin-left: 200px; /*Changed from 250*/
-        padding: 30px 30px 0 30px;
+        padding: 25px 10px 0 10px;
         border-left: 1px solid #e7e7e7;
     }
 }
@@ -41,6 +41,7 @@ body {
 
 .navbar-top-links {
     margin: 0;
+    margin-right: 8px;
 }
 
 .navbar-top-links li {
@@ -357,20 +358,39 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-yellow {
-    border-color: #f0ad4e;
+    border-color: #e5e24b;
 }
 
 .panel-yellow .panel-heading {
-    border-color: #f0ad4e;
+    border-color: #e5e24b;
     color: #fff;
-    background-color: #f0ad4e;
+    background-color: #e5e24b;
 }
 
 .panel-yellow a {
-    color: #f0ad4e;
+    color: #e5e24b;
 }
 
 .panel-yellow a:hover {
+    color: #df8a13;
+}
+
+/*panel-orange*/
+.panel-orange {
+    border-color: #e89106;
+}
+
+.panel-orange .panel-heading {
+    border-color: #e89106;
+    color: #fff;
+    background-color: #e89106;
+}
+
+.panel-orange a {
+    color: #e89106;
+}
+
+.panel-orange a:hover {
     color: #df8a13;
 }
 

@@ -7,12 +7,6 @@ const passport = require ('passport');
 const LocalStrategy = require ('passport-local').Strategy;
 const User = require('./../server/models/user.js');
 
-/*
-    GET Add User
-*/
-router.get('/app/adduser', (req, res) => {
-    res.render('adduser');
-});
 
 /*
     POST Register User -> when the form get submitted
@@ -28,7 +22,7 @@ router.post('/app/adduser', (req, res) => {
     // if there are errors, flash messages on the screen
     var errors = req.validationErrors();
     if(errors) {
-        res.render('adduser', {
+        res.render('settings', {
             errors: errors
         });
     } else {
@@ -45,7 +39,7 @@ router.post('/app/adduser', (req, res) => {
         });
 
         req.flash('success_msg', 'User succesfully created');
-        res.redirect('/app/adduser');
+        res.redirect('/app/settings');
     }
 });
 

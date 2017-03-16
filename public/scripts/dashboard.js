@@ -12,16 +12,12 @@ $(document).ready(function () {
 
       		var patientArray = [];
       		patientArray.push(patient["NHSnumber"]);
-      		patientArray.push(patient["name"]);
+      		patientArray.push(patient["firstName"] + " " + patient["lastName"]);
       		patientArray.push(patient["room"]);
       		patientArray.push(patient["score"]);
 
-      		console.log(patientArray);
-
       		patientsArray.push(patientArray);
       	}
-
-      	console.log(patientsArray);
 
       	$('#patients-waiting').dataTable( {
 	        data: patientsArray,
@@ -31,9 +27,11 @@ $(document).ready(function () {
 	            { title: "Room" },
 	            { title: "Score" }
 	        ],
-	        scrollY:        '50vh',
+	        scrollY:        '60vh',
 	        scrollCollapse: true,
-	        paging:         false
+	        paging:         false,
+            resposnive:     true,
+            info: false
    		} );
 
 
@@ -45,9 +43,11 @@ $(document).ready(function () {
 	            { title: "Room" },
 	            { title: "Score" }
 	        ],
-	        scrollY:        '50vh',
+	        scrollY:        '60vh',
 	        scrollCollapse: true,
-	        paging:         false
+	        paging:         false,
+            resposnive:     true,
+            info: false
    		} );
 	} );
 } );

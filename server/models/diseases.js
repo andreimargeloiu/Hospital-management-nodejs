@@ -8,6 +8,8 @@ scoreOfDisease['Campylobacter'] = 10;
 scoreOfDisease['Chicken Pox'] = 70;
 scoreOfDisease['CJD'] = 10;
 scoreOfDisease['Cryptococcus'] = 5;
+scoreOfDisease['Test disease'] = 30;
+
 
 
 

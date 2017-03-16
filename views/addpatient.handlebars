@@ -1,4 +1,4 @@
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript" src="/scripts/addpatient.js"></script>
 
 <div id="show-diseases-form">
@@ -9,4 +9,46 @@
     {{#if score}}
         <p>Score is {{score}}</p>
     {{/if}}
+</div> -->
+
+
+<link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+
+<div class="col-md-6 col-lg-6">
+    <form action="/app/addpatient" method="post">
+        <!-- First name input -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-md-2 col-lg-2 col-form-label">First Name</label>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <input class="form-control" style="width: 100%;" type="text" name="firstName" placeholder="Enter first name...">
+            </div>
+        </div>
+
+        <!-- Last name input -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Last name</label>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <input class="form-control" style="width: 100%;" type="text" name="lastName" placeholder="Enter last name...">
+            </div>
+        </div>
+
+        <!-- NHS number input -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-md-2 col-lg-2 col-form-label">NHS number</label>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <input class="form-control" style="width: 100%;" type="text" name="NHSnumber" placeholder="Enter NHS number...">
+            </div>
+        </div>
+
+
+    	<table id="add-new-patient" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    		<!-- JavaScript works here! -->
+    	</table>
+    	<input class="btn btn-danger" style="float: right;" type="Submit" name="Submit" value="Add patient">
+    </form>
 </div>
+
+<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="/scripts/addPatient.js"></script>
