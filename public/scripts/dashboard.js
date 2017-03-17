@@ -51,3 +51,14 @@ $(document).ready(function () {
    		} );
 	} );
 } );
+
+$(document).ready(function()
+				  {
+    				  $("body").on('click', 'tr', function()
+    				  							  {
+        											  var NHSnumber = $(this).children('td')[0];
+        											  NHSnumber = NHSnumber.textContent;
+        											  window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
+        										  });
+
+    			  });

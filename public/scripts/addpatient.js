@@ -56,6 +56,6 @@ $(document).ready(function()
                                                                                           scrollCollapse: true,
                                                                                           paging: false,
                                                                                           info: false
-                                                                                });
+                                                                                      });
                                                   });
                   });
