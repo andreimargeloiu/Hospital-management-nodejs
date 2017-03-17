@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
       var flickerAPI = "http://localhost:3000/app/getpatients";
       $.getJSON(flickerAPI).done(function(patients) {
 
@@ -49,16 +48,12 @@ $(document).ready(function () {
             resposnive:     true,
             info: false
    		} );
-	} );
+	});
+
+    // click on a patient and redirect to his page
+    $("body").on('click', 'tr', function() {
+        var NHSnumber = $(this).children('td')[0];
+        NHSnumber = NHSnumber.textContent;
+        window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
+    });
 } );
-
-$(document).ready(function()
-				  {
-    				  $("body").on('click', 'tr', function()
-    				  							  {
-        											  var NHSnumber = $(this).children('td')[0];
-        											  NHSnumber = NHSnumber.textContent;
-        											  window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
-        										  });
-
-    			  });
