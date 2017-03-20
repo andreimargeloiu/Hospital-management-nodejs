@@ -1,20 +1,42 @@
 // Add execution whilst clicked on a specific row in the dashboard.
 $(document).ready(function() {
-    var NHSnumber= window.location.pathname.split('/');
+    var hospitalNumber= window.location.pathname.split('/');
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    // Chaneg the index of the array NHSnumbr when givving into production
+    // Chaneg the index of the array NHSnumbr when giving into production
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    var patientAPI = "http://localhost:3000/app/getpatient/" + NHSnumber[3];
+    var patientAPI = "http://localhost:3000/app/getpatient/" + hospitalNumber[3];
 
-    $("#form-patient").attr("action", "/app/updatepatient/" + NHSnumber[3]);
+    $("#form-patient").attr("action", "/app/updatepatient/" + hospitalNumber[3]);
+    $("#delete-button").attr("href", "/app/deletepatient/" + hospitalNumber[3]);
 
     $.getJSON(patientAPI).done(function(patient) {
        $("#first-name-disabled").attr("placeholder", patient["firstName"]);
        $("#last-name-disabled").attr("placeholder", patient["lastName"]);
-       $("#NHSnumber-disabled").attr("placeholder", patient["NHSnumber"]);
+       $("#hospitalNumber-disabled").attr("placeholder", patient["hospitalNumber"]);
        $("#patient-score").html(patient["score"]);
+/*
+       Sex of the patient
+*/
+       if (patient["sex"] === true) {
+           $("#sex").html("Male");
+       } else if (patient["sex"] === false) {
+          $("#sex").html("Female");
+       }
 
+
+/*
+      Room of the patient
+*/
+       if (patient["room"] === "no room") {
+           $("#patient-room").text('No room');
+       } else {
+           $("#patient-room").text('Room: ' + patient["room"]);
+       }
+
+/*
+       Score panel
+*/
        if (patient["score"] <=5) {
            $("#panel-score").attr("class", "panel panel-primary");
        } else if (patient["score"] <= 20) {
@@ -58,18 +80,13 @@ $(document).ready(function() {
            // Add name, sex, number, age before the table.
            $('#diagnosis').dataTable({
 		      data: diseasesScoresCheckboxes,
-		      columns:
-		      [
-		          {
-		              title: "Disease"
-		          },
-		          {
-		              title: "Score"
-		          },
-		          {
-		              title: "Diagnosis"
-		          },
-		      ],
+		      columns:[{
+	              title: "Disease"
+	          },{
+	              title: "Score"
+	          },{
+	              title: "Diagnosis"
+	          }],
 		      scrollY: '60vh',
 		      scrollCollapse: true,
 		      paging: false,

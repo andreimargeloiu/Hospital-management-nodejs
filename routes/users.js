@@ -7,9 +7,8 @@ const passport = require ('passport');
 const LocalStrategy = require ('passport-local').Strategy;
 const User = require('./../server/models/user.js');
 
-
 /*
-    POST Register User -> when the form get submitted
+    POST /app/adduser -> request to add a new user in the database
 */
 router.post('/app/adduser', (req, res) => {
 	var username = req.body.username;
@@ -42,6 +41,7 @@ router.post('/app/adduser', (req, res) => {
         res.redirect('/app/settings');
     }
 });
+
 
 router.get('/app/logout', function(req, res) {
     req.logout();

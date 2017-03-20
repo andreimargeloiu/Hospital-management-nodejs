@@ -17,10 +17,12 @@ var PatientSchema = mongoose.Schema({
 		default: Date(2017, 3, 17, 19, 21)
 	},
 	sex: {
-		type: String,
-		default: "male"
+		// true = male
+		// false = female
+		type: Boolean,
+		default: true
 	},
-	NHSnumber: {
+	hospitalNumber: {
 		type: String,
 		default: '134574806'
 	},

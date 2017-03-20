@@ -1,176 +1,126 @@
 var patientsWaitingTableConstructor = [];
 var patientsInHospitalTableConstructor = [];
 var freeRoomsTableConstructor = [];
-var dynamicTable;
 var dynamicTableClickable = true;
 
-$(document).ready(function()
-				  {
-					  var patientsAPI = "http://localhost:3000/app/getpatients";
-				      $.getJSON(patientsAPI).done(function(patients)
-				      							  {
-				      								  var roomsAPI = "http://localhost:3000/app/getrooms";
-				      								  $.getJSON(roomsAPI).done(function(rooms1)
-				      								 						  {
-																			  	  for(var room in rooms1["rooms"])
-																			  	  {
-																				  	  var freeRoomsRowConstructor = [];
-																				  	  var iterator = 0;
+$(document).ready(function() {
+  var patientsAPI = "http://localhost:3000/app/getpatients";
+  $.getJSON(patientsAPI).done(function(patients) {
+	  var roomsAPI = "http://localhost:3000/app/getrooms";
+	  $.getJSON(roomsAPI).done(function(rooms1) {
+	  	  for(var room in rooms1["rooms"]) {
+		  	  var freeRoomsRowConstructor = [];
+		  	  var iterator = 0;
 
-																				  	  console.log(room);
+		  	  for(var i = 0; i < patients.length; i++) {
+		  	  	  if(room !== patients[i]["room"]) {
+		  	  	  	  iterator++;
+		  	  	  }
+		  	  }
+		  	  if(iterator === patients.length) {
+		  	  	  freeRoomsRowConstructor.push(room);
+		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
+		  	  }
+		  }
 
-																				  	  for(var i = 0; i < patients.length; i++)
-																				  	  {
-																				  	  	  if(room !== patients[i]["room"])
-																				  	  	  {
-																				  	  	  	  iterator++;
-																				  	  	  }
-																				  	  }
-																				  	  if(iterator === patients.length)
-																				  	  {
-																				  	  	  freeRoomsRowConstructor.push(room);
+		  console.log(freeRoomsRowConstructor);
+		  console.log(freeRoomsTableConstructor);
 
-																				  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
-																				  	  }
-																				  }
+		  for(var i = 0; i < patients.length; i++) {
+			  var patient = patients[i];
 
-																				  console.log(freeRoomsRowConstructor);
-																				  console.log(freeRoomsTableConstructor);
+			  var patientsRowConstructor = [];
+			  patientsRowConstructor.push(patient["hospitalNumber"]);
+			  patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
 
-																				  for(var i = 0; i < patients.length; i++)
-																				  {
-																					  var patient = patients[i];
+			  if(patient["room"] === "no room") {
+			  	  patientsRowConstructor.push(patient["score"]);
 
-																					  var patientsRowConstructor = [];
-																					  patientsRowConstructor.push(patient["NHSnumber"]);
-																					  patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
+			  	  patientsWaitingTableConstructor.push(patientsRowConstructor);
+			  } else {
+			  	  patientsRowConstructor.push(patient["room"]);
+			  	  patientsRowConstructor.push(patient["score"]);
 
-																					  if(patient["room"] === "no room")
-																					  {
-																					  	  patientsRowConstructor.push(patient["score"]);
+			  	  patientsInHospitalTableConstructor.push(patientsRowConstructor);
+			  }
+		  }
 
-																					  	  patientsWaitingTableConstructor.push(patientsRowConstructor);
-																					  }
-																					  else
-																					  {
-																					  	  patientsRowConstructor.push(patient["room"]);
-																					  	  patientsRowConstructor.push(patient["score"]);
+		  $('#patients-waiting').dataTable({
+		       data: patientsWaitingTableConstructor,
+		       columns: [{
+		       	   title: "Hospital no."
+		       }, {
+		           title: "Name"
+		       }, {
+		           title: "Score"
+		       }],
+		       scrollY: '60vh',
+		       scrollCollapse: true,
+		       paging: false,
+		       resposnive: true,
+		       info: false
+		   });
 
-																					  	  patientsInHospitalTableConstructor.push(patientsRowConstructor);
-																					  }
-																				  }
+		  $('#patients-in-hospital').DataTable({
+   				data: patientsInHospitalTableConstructor,
+		        columns:[{
+	                title: "Hospital no."
+	            },{
+	           	    title: "Name"
+	            },{
+	           	    title: "Room"
+	            },{
+	           	    title: "Score"
+	            }],
+		        scrollY: '60vh',
+		        scrollCollapse: true,
+		        paging: false,
+		        resposnive: true,
+		        info: false
+            });
 
-																				  $('#patients-waiting').dataTable({
-																												       data: patientsWaitingTableConstructor,
-																												       columns:
-																												       [
-																												       	   {
-																												       	   	   title: "NHSnumber"
-																												       	   },
-																												           {
-																												           	   title: "Name"
-																												           },
-																												           {
-																												           	   title: "Score"
-																												           }
-																												       ],
-																												       scrollY: '60vh',
-																												       scrollCollapse: true,
-																												       paging: false,
-																												       resposnive: true,
-																												       info: false
-																												   });
-
-																				  dynamicTable = $('#patients-in-hospital-or-free-rooms').DataTable({
-																								    									   				data: patientsInHospitalTableConstructor,
-																																				        columns:
-																																				        [
-																																				            {
-																																				                title: "NHSnumber"
-																																				            },
-																																				            {
-																																				           	    title: "Name"
-																																				            },
-																																				            {
-																																				           	    title: "Room"
-																																				            },
-																																				            {
-																																				           	    title: "Score"
-																																				            }
-																																				        ],
-																																				        scrollY: '60vh',
-																																				        scrollCollapse: true,
-																																				        paging: false,
-																																				        resposnive: true,
-																																				        info: false
-																																                    });
-																			  });
-				      							  });
-				  });
+			//  table with free rooms in the right side
+		  $('#free-rooms').dataTable({
+			  data: freeRoomsTableConstructor,
+			  columns:[{
+				  title: "Free rooms"
+			  }],
+			  scrollY: '60vh',
+			  scrollCollapse: true,
+			  paging: false,
+			  resposnive: true,
+			  info: false
+		  });
 
 
+            //   Set dashboard data in the three boxes on the top
+            var patientsWithRoomsDashboard = patientsInHospitalTableConstructor.length || 0;
+            $("#patients-with-rooms-live").html(patientsWithRoomsDashboard);
 
-$("body").on('click', '#patients-in-hospital-or-free-rooms > tbody > tr', function()
-												  						  {
-																			  if(dynamicTableClickable)
-																			  {
-																				  var NHSnumber = $(this).children('td')[0];
-																				  NHSnumber = NHSnumber.textContent;
-																				  window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
-																			  }
-																		  });
+            var patientsWaitingDashboard = patientsWaitingTableConstructor.length || 0;
+            $("#patients-waiting-live").html(patientsWaitingDashboard);
+
+            var freeRoomsDashboard = freeRoomsTableConstructor.length || 0;
+            $("#free-rooms-live").html(freeRoomsDashboard);
+
+	  });
+  });
+});
+
+
+
+$("body").on('click', '#patients-in-hospital > tbody > tr', function()
+{
+    if(dynamicTableClickable)
+    {
+      var NHSnumber = $(this).children('td')[0];
+      NHSnumber = NHSnumber.textContent;
+      window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
+    }
+});
 $("body").on('click', '#patients-waiting > tbody > tr', function()
-														{
-															var NHSnumber = $(this).children('td')[0];
-															NHSnumber = NHSnumber.textContent;
-															window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
-														});
-$("body").on('click', '#patientsInRooms', function()
-  									      {
-  											  dynamicTable.destroy();
-  											  $('#patients-in-hospital-or-free-rooms').empty();
-  											  dynamicTable = $('#patients-in-hospital-or-free-rooms').DataTable({
-															    									   				data: patientsInHospitalTableConstructor,
-																											        columns:
-																											        [
-																											            {
-																											                title: "NHSnumber"
-																											            },
-																											            {
-																											                title: "Name"
-																											            },
-																											            {
-																											                title: "Room"
-																											            },
-																											            {
-																											                title: "Score"
-																											            }
-																											        ],
-																											        scrollY: '60vh',
-																											        scrollCollapse: true,
-																											        paging: false,
-																											        resposnive: true,
-																											        info: false
-																											    });
-  											  dynamicTableClickable = true;
-  										  });
-$("body").on('click', '#freeRooms', function()
-								    {
-									    dynamicTable.destroy();
-									    $('#patients-in-hospital-or-free-rooms').empty();
-									    dynamicTable = $('#patients-in-hospital-or-free-rooms').DataTable({
-														    									        	  data: freeRoomsTableConstructor,
-																							            	  columns:
-																							            	  [
-																							                	  {
-																							                    	  title: "Room"
-																							                	  }
-																							            	  ],
-																							            	  scrollY: '60vh',
-																							            	  scrollCollapse: true,
-																							            	  paging: false,
-																							            	  resposnive: true,
-																							            	  info: false
-																							              });
-									    dynamicTableClickable = false;
-								    });
+{
+	var NHSnumber = $(this).children('td')[0];
+	NHSnumber = NHSnumber.textContent;
+	window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
+});

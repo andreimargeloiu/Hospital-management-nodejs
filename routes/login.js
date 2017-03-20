@@ -8,14 +8,14 @@ const LocalStrategy = require ('passport-local').Strategy;
 const User = require('./../server/models/user.js');
 
 /*
-    GET /  // LOGIN
+    GET / -> rget to the login page
 */
 router.get('/', (req, res) => {
     res.render('login', {layout: false});
 });
 
 /*
-    POST /login
+    POST /login -> authentificate the user
 */
 router.post('/login',
     passport.authenticate('local', {

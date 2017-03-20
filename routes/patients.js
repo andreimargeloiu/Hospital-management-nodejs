@@ -1,8 +1,8 @@
 // POST /app/addpatient           -> add a patient in the database
 // GET  /app/getpatients          -> get a JSON with all patients
-// GET  /app/patient/:NHSnumber   -> get one patiente data
-// GET  /app/getpatient/:NHSnumber-> get JSON of a patiente data
-// PUT  /app/patient/:NHSnumber   -> update a patient data from the database
+// GET  /app/patient/:hospitalNumber   -> get one patiente data
+// GET  /app/getpatient/:hospitalNumber-> get JSON of a patiente data
+// PUT  /app/patient/:hospitalNumber   -> update a patient data from the database
 
 const express = require('express');
 const router = express.Router();
@@ -16,26 +16,32 @@ const {ObjectID} = require('mongodb');
     POST /addPatient -> add new patient
 */
 router.post('/app/addpatient', (req, res) => {
-    // receive the form data in the array PD, each element being a String with the disease name
+    // receive the diseases from the form in the array PD, each element being a String with the disease name
     var PD = req.body.PD;
-    if (PD === null || PD === undefined) {
+    if (PD === null || PD === undefined) {    // check if no disease is selected
         PD = [];
     }
+
+    var sex = req.body.sex;
+    if (sex === "male") {
+        sex = true;
+    } else if (sex === "female") {
+        sex = false;
+    }
+
+    console.log(sex);
 
     // make a new patient and add it in the database
     var patient = Patient({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        NHSnumber: req.body.NHSnumber || "12345678",
+        sex: sex,
+        hospitalNumber: req.body.hospitalNumber || "12345678",
         diseases: PD,
         score: computeScore(PD)
     });
 
-    patient.save(function(err, patient) {
-        if (err) {
-            console.log(err);
-        }
-    });
+    patient.save();
 
     res.redirect('/app');
 });
@@ -53,10 +59,10 @@ router.get('/app/getpatients', (req, res) => {
 /*
     GET one patient data -> for his personal page
 */
-router.get('/app/patient/:NHSnumber', (req, res) => {
-    NHSnumber = req.params.NHSnumber;
+router.get('/app/patient/:hospitalNumber', (req, res) => {
+    hospitalNumber = req.params.hospitalNumber;
     Patient.findOne({
-        NHSnumber: NHSnumber
+        hospitalNumber: hospitalNumber
     }, function (err, patient) {
         if (err) {
             console.log(err);
@@ -69,10 +75,10 @@ router.get('/app/patient/:NHSnumber', (req, res) => {
 /*
     GET one patient data and return it as JSON
 */
-router.get('/app/getpatient/:NHSnumber', (req, res) => {
-    NHSnumber = req.params.NHSnumber;
+router.get('/app/getpatient/:hospitalNumber', (req, res) => {
+    hospitalNumber = req.params.hospitalNumber;
     Patient.findOne({
-        NHSnumber: NHSnumber
+        hospitalNumber: hospitalNumber
     }, function (err, patient) {
         if (err) {
             console.log(err);
@@ -86,9 +92,9 @@ router.get('/app/getpatient/:NHSnumber', (req, res) => {
     PUT /app/getpatient -> update a patient data
 */
 var actualRoom;
-function retrieveRoom(NHSnumber, callback) {
+function retrieveRoom(hospitalNumber, callback) {
     Patient.find({
-        NHSnumber: NHSnumber
+        hospitalNumber: hospitalNumber
     }, function (err, patient) {
         if (err) {
             callback(err, null);
@@ -98,11 +104,11 @@ function retrieveRoom(NHSnumber, callback) {
     });
 }
 
-router.post('/app/updatepatient/:NHSnumber', (req, res) => {
-    NHSnumber = req.params.NHSnumber;
+router.post('/app/updatepatient/:hospitalNumber', (req, res) => {
+    hospitalNumber = req.params.hospitalNumber;
 
     // unassign the past room of the patient
-    // retrieveRoom(NHSnumber, (err, room) => {
+    // retrieveRoom(hospitalNumber, (err, room) => {
     //     if (err) {
     //         console.log(err);
     //     } else {
@@ -124,7 +130,7 @@ router.post('/app/updatepatient/:NHSnumber', (req, res) => {
 
     // update the patient details
     Patient.findOneAndUpdate({
-        NHSnumber: NHSnumber
+        hospitalNumber: hospitalNumber
     }, {
         "$set": {
             "diseases": PD,
@@ -136,7 +142,21 @@ router.post('/app/updatepatient/:NHSnumber', (req, res) => {
             res.status(404).send();
         }
     });
-    res.redirect('/app/patient/' + NHSnumber);
+    res.redirect('/app/patient/' + hospitalNumber);
+});
+
+router.get('/app/deletepatient/:hospitalNumber', (req, res) => {
+    var hospitalNumber = req.params.hospitalNumber;
+
+    Patient.find({
+        hospitalNumber: hospitalNumber
+    }).remove().exec(function(err, data) {
+        if (err) {
+            console.log(err);
+            res.status(404).send();
+        }
+    });
+    res.redirect('/app');
 });
 
 module.exports = router;

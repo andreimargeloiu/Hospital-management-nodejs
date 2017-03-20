@@ -11,24 +11,8 @@
                         <i class="fa fa-hotel fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{patientsInRooms}}</div>
+                        <div id="patients-with-rooms-live" class="huge"></div>
                         <div>Patients with rooms</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-4 col-md-4">
-        <div class="panel panel-orange">
-            <div class="panel-heading" id="freeRooms">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-hourglass-start fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge">{{freeRooms}}</div>
-                        <div>Free rooms</div>
                     </div>
                 </div>
             </div>
@@ -40,11 +24,27 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-wheelchair fa-5x"></i>
+                        <i class="fa fa-child fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{patientsWaiting}}</div>
+                        <div id="patients-waiting-live" class="huge"></div>
                         <div>Patients waiting</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4">
+        <div class="panel panel-orange">
+            <div class="panel-heading" id="freeRooms">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa  fa-frown-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div id="free-rooms-live" class="huge"></div>
+                        <div>Free rooms</div>
                     </div>
                 </div>
             </div>
@@ -52,19 +52,21 @@
     </div>
 </div>
 
-
-<h4 class="page-header" style="margin-top: 0px; padding: 0px;"></h4>
-
-
 <!-- Table with patients in rooms-->
 <div class="col-lg-6 col-md-6">
-	<table id="patients-in-hospital-or-free-rooms" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+	<table id="patients-in-hospital" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
 </div>
 
 <!-- Table with patients waiting to get a room-->
-<div class="col-lg-6 col-md-6">
+<div class="col-lg-4 col-md-4">
     <table id="patients-waiting" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
 </div>
+
+<!-- Table with free rooms-->
+<div class="col-lg-2 col-md-2">
+    <table id="free-rooms" class="table table-striped table-bordered" cellspacing="0" width="100%"></table>
+</div>
+
 
 <!-- <script type="text/javascript" src="/js/jquery-1.12.4.js"></script> -->
 <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
