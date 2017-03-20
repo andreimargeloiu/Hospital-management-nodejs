@@ -10,14 +10,8 @@ $(document).ready(function() {
 	  $.getJSON(roomsAPI).done(function(rooms1) {
 	  	  for(var room in rooms1["rooms"]) {
 		  	  var freeRoomsRowConstructor = [];
-		  	  var iterator = 0;
-
-		  	  for(var i = 0; i < patients.length; i++) {
-		  	  	  if(room !== patients[i]["room"]) {
-		  	  	  	  iterator++;
-		  	  	  }
-		  	  }
-		  	  if(iterator === patients.length) {
+              
+		  	  if(rooms1["rooms"][room] === false) {
 		  	  	  freeRoomsRowConstructor.push(room);
 		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
 		  	  }
