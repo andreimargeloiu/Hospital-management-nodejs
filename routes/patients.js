@@ -1,13 +1,16 @@
-// POST /app/addpatient           -> add a patient in the database
-// GET  /app/getpatients          -> get a JSON with all patients
-// GET  /app/patient/:hospitalNumber   -> get one patiente data
-// GET  /app/getpatient/:hospitalNumber-> get JSON of a patiente data
-// PUT  /app/patient/:hospitalNumber   -> update a patient data from the database
+/*
+     POST /app/addpatient           -> add a patient in the database
+     GET  /app/getpatients          -> get a JSON with all patients
+     GET  /app/patient/:hospitalNumber   -> get one patiente data
+     GET  /app/getpatient/:hospitalNumber-> get JSON of a patiente data
+     PUT  /app/patient/:hospitalNumber   -> update a patient data from the database
+*/
 
 const express = require('express');
+const _ = require('lodash');
 const router = express.Router();
 
-var scoreOfDisease = require('./../server/models/diseases.js');
+var {scoreOfDisease, Disease} = require('./../server/models/diseases.js');
 var {Patient, computeScore} = require('./../server/models/patient.js');
 var {rooms, assignRoom, unassignRoom} = require('./../server/models/rooms.js');
 const {ObjectID} = require('mongodb');
@@ -25,26 +28,55 @@ router.post('/app/addpatient', (req, res) => {
     var sex = req.body.sex;
     if (sex === "male") {
         sex = true;
-    } else if (sex === "female") {
+    } else {
         sex = false;
     }
 
-    console.log(sex);
+    // get disease from mongodb
+    Disease.find({}).then((diseases) => {
+        console.log(req.body.PD);
+
+    });
+
 
     // make a new patient and add it in the database
     var patient = Patient({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         sex: sex,
-        hospitalNumber: req.body.hospitalNumber || "12345678",
-        diseases: PD,
-        score: computeScore(PD)
+        hospitalNumber: req.body.hospitalNumber,
+        diseases: PD
+        // score: computeScore(PD)
     });
 
-    patient.save();
+    patient.save().then((patient) => {
+        // patient saved
+        Disease.find({}).then((diseases) => {
+            var scoreOfDisease = {};
+            var score = 0;
+            if (diseases !== null && diseases !== undefined) {
+                // create a hashmap with the diseases and their scores
+                for (var i = 0; i < diseases.length; ++i) {
+                    scoreOfDisease[diseases[i].name] = diseases[i].score;
+                }
+
+            	for (var prop in scoreOfDisease) {
+                   if (scoreOfDisease[prop] > score) {
+            			score = scoreOfDisease[prop];
+            		}
+            	}
+            }
+
+            patient.score = score;
+            patient.save();
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
 
     res.redirect('/app');
 });
+
 
 router.get('/app/getpatients', (req, res) => {
     Patient.find({}, function (err, patients) {
@@ -88,38 +120,13 @@ router.get('/app/getpatient/:hospitalNumber', (req, res) => {
     });
 });
 
-/*
-    PUT /app/getpatient -> update a patient data
-*/
-var actualRoom;
-function retrieveRoom(hospitalNumber, callback) {
-    Patient.find({
-        hospitalNumber: hospitalNumber
-    }, function (err, patient) {
-        if (err) {
-            callback(err, null);
-        } else {
-            callback(null, patient.room);
-        }
-    });
-}
 
+/*
+    POST /app/updatepatient/:hospitalNumber -> update disease & score for patient
+                                            -> request made from the patientPage
+*/
 router.post('/app/updatepatient/:hospitalNumber', (req, res) => {
     hospitalNumber = req.params.hospitalNumber;
-
-    // unassign the past room of the patient
-    // retrieveRoom(hospitalNumber, (err, room) => {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         actualRoom = room;
-    //     }
-    // });
-    // unassignRoom(actualRoom);
-
-    // assign the new room to the patient
-    // var newRoom = req.body.room;
-    // assignRoom(newRoom);
 
     // GET form attributes
     var PD = req.body.PD;

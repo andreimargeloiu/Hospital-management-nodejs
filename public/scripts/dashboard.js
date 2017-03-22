@@ -10,7 +10,7 @@ $(document).ready(function() {
 	  $.getJSON(roomsAPI).done(function(rooms1) {
 	  	  for(var room in rooms1["rooms"]) {
 		  	  var freeRoomsRowConstructor = [];
-              
+
 		  	  if(rooms1["rooms"][room] === false) {
 		  	  	  freeRoomsRowConstructor.push(room);
 		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
@@ -52,7 +52,11 @@ $(document).ready(function() {
 		       scrollCollapse: true,
 		       paging: false,
 		       resposnive: true,
-		       info: false
+		       info: false,
+               language: {
+                 searchPlaceholder: "Search patient waiting...",
+                 sSearch: ""
+               }
 		   });
 
 		  $('#patients-in-hospital').DataTable({
@@ -70,7 +74,11 @@ $(document).ready(function() {
 		        scrollCollapse: true,
 		        paging: false,
 		        resposnive: true,
-		        info: false
+		        info: false,
+                language: {
+                  searchPlaceholder: "Search patient in room...",
+                  sSearch: ""
+                }
             });
 
 			//  table with free rooms in the right side
@@ -83,7 +91,11 @@ $(document).ready(function() {
 			  scrollCollapse: true,
 			  paging: false,
 			  resposnive: true,
-			  info: false
+			  info: false,
+              language: {
+                searchPlaceholder: "Search room...",
+                sSearch: ""
+              }
 		  });
 
 

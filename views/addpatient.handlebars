@@ -1,17 +1,3 @@
-<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script type="text/javascript" src="/scripts/addpatient.js"></script>
-
-<div id="show-diseases-form">
-    <p>
-        Select patient diseases:
-    </p>
-
-    {{#if score}}
-        <p>Score is {{score}}</p>
-    {{/if}}
-</div> -->
-
-
 <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 
@@ -46,10 +32,10 @@
             <label class="col-sm-3 col-md-3 col-lg-3 col-form-label">Sex</label>
             <div class="col-sm-9 col-md-9 col-lg-9">
                 <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-primary active">
+                  <label class="btn btn-primary active" style="margin:0px;">
                     <input id="male-radio" type="radio" name="sex" value="male" autocomplete="off" checked>Male
                   </label>
-                  <label class="btn btn-primary">
+                  <label class="btn btn-primary" style="margin:0px;">
                     <input id="female-radio" type="radio" name="sex" value="female" autocomplete="off"> Female
                   </label>
                 </div>
@@ -59,7 +45,7 @@
     	<table id="add-new-patient" class="table table-striped table-bordered" cellspacing="0" width="100%">
     		<!-- JavaScript works here! -->
     	</table>
-    	<input class="btn btn-danger" style="float: right;" type="Submit" name="Submit" value="Add patient">
+    	<input class="btn btn-success" style="float: right;" type="Submit" name="Submit" value="Add patient">
     </form>
 </div>
 

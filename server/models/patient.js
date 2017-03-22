@@ -1,5 +1,5 @@
 const mongoose = require ('mongoose');
-var scoreOfDisease = require('./diseases.js');
+var {scoreOfDisease, Disease} = require('./diseases.js');
 var rooms = require('./rooms.js');
 
 // User Schema

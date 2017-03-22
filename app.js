@@ -84,14 +84,6 @@ app.use(function (req, res, next) {
 });
 
 /*
-    Website routes
-*/
-var login = require('./routes/login');
-var users = require('./routes/users');
-var appRoute = require('./routes/app');
-var patients = require('./routes/patients');
-
-/*
     Ensure authetification
 */
 // app.use('/app', (req, res, next) => {
@@ -104,11 +96,22 @@ var patients = require('./routes/patients');
 //     }
 // });
 
+/*
+    Website routes
+*/
+var login = require('./routes/login');
+var users = require('./routes/users');
+var appRoute = require('./routes/app');
+var patients = require('./routes/patients');
+var settings = require('./routes/settings');
+var diseases = require('./routes/diseases');
+
 app.use('/', login);
 app.use('/', appRoute);
 app.use('/', users);
 app.use('/', patients);
-
+app.use('/', settings);
+app.use('/', diseases);
 
 /*
     Fire the server online

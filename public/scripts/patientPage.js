@@ -90,7 +90,10 @@ $(document).ready(function() {
 		      scrollY: '60vh',
 		      scrollCollapse: true,
 		      paging: false,
-              info: false
+              info: false,
+              language: {
+                sSearch: "Search disease"
+              }
 		   });
        });
     });
