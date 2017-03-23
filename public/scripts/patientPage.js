@@ -1,9 +1,8 @@
-// Add execution whilst clicked on a specific row in the dashboard.
 $(document).ready(function() {
     var hospitalNumber= window.location.pathname.split('/');
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    // Chaneg the index of the array NHSnumbr when giving into production
+    // Change the index of the array NHSnumbr when giving into production
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     var patientAPI = "http://localhost:3000/app/getpatient/" + hospitalNumber[3];
 
@@ -19,11 +18,10 @@ $(document).ready(function() {
        Sex of the patient
 */
        if (patient["sex"] === true) {
-           $("#sex").html("Male");
+           $("#patient-sex-disabled").attr("placeholder", "Male");
        } else if (patient["sex"] === false) {
-          $("#sex").html("Female");
+           $("#patient-sex-disabled").attr("placeholder", "Female");
        }
-
 
 /*
       Room of the patient
@@ -51,8 +49,7 @@ $(document).ready(function() {
        $.getJSON(diseasesAPI).done(function(allDiseases) {
            var diseasesScoresCheckboxes = [];
 
-           for(var disease in allDiseases)
-           {
+           for(var disease in allDiseases) {
                var diseaseScoreCheckbox = [];
         	   diseaseScoreCheckbox[0] = disease;
         	   diseaseScoreCheckbox[1] = allDiseases[disease]; // This is the score.
@@ -71,9 +68,7 @@ $(document).ready(function() {
                    input = "<input type=\"checkbox\" name=\"PD[]\" value=\"" + disease + "\">";
                }
 
-
           	   diseaseScoreCheckbox[2] = input;
-
         	   diseasesScoresCheckboxes.push(diseaseScoreCheckbox)
            }
 

@@ -1,12 +1,40 @@
 <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 
-
 <div class="row">
-    <!-- Name this file UpdatePatient.handlebars -->
-    <div class="col-md-6 col-lg-6">
+    <!-- Auxiliary column -->
+    <div class="col-sm-12 col-md-4 col-md-push-8 col-lg-3 col-lg-push-6">
+        <!-- The score -->
+        <div class="row">
+            <div id="panel-score" class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-child fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div id="patient-score" class="huge"></div>
+                            <div>Patient score</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <form id="form-patient" method="post"> <!-- Change here to method="put" and the route to be dependant on {{hospitalNumber}} -->
+        <div class="row">
+            <button id="patient-room" type="button" class="btn btn-default btn-lg btn-block"></button>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <a id="delete-button" class="btn btn-danger btn-lg btn-block">Delete patient</a>
+        </div>
+    </div>
+
+    <!-- Disease table column -->
+    <div class="col-sm-12 col-md-8 col-md-pull-4 col-lg-6 col-lg-pull-3">
+        <form id="form-patient" method="post">
             <!-- First name-->
             <div class="form-group row">
                 <label class="col-sm-3 col-md-3 col-lg-3 col-form-label">First name</label>
@@ -35,7 +63,7 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-md-3 col-lg-3 col-form-label">Sex</label>
                 <div class="col-sm-9 col-md-9 col-lg-9">
-                    <h5 id="sex"></h5>
+                    <input class="form-control" style="width: 100%;" id="patient-sex-disabled" type="text" disabled>
                 </div>
             </div>
 
@@ -44,35 +72,6 @@
         	</table>
         	<input class="btn btn-primary" style="float: right;" type="Submit" name="Submit" value="Update patient">
         </form>
-    </div>
-
-
-    <div class="col-sm-3 col-md-3 col-lg-3">
-        <!-- The score -->
-        <div class="row">
-            <div id="panel-score" class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-wheelchair fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div id="patient-score" class="huge"></div>
-                            <div>Patient score</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <button id="patient-room" type="button" class="btn btn-default btn-lg btn-block"></button>
-        </div>
-
-        <br>
-
-        <div class="row">
-            <a id="delete-button" class="btn btn-danger btn-lg btn-block">Delete patient</a>
-        </div>
     </div>
 </div>
 

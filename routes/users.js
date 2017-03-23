@@ -23,7 +23,7 @@ router.post('/app/adduser', (req, res) => {
     // if there are errors, flash messages on the screen
     var errors = req.validationErrors();
     if(errors) {
-        res.redirect('systemsettings');
+        res.status(400).redirect('systemsettings');
     } else {
         // if everything is OK, create a new user in the database
         var newUser = new User({
@@ -39,7 +39,7 @@ router.post('/app/adduser', (req, res) => {
         });
 
         req.flash('success_msg', 'User succesfully created');
-        res.redirect('/app/systemsettings');
+        res.status(200).redirect('/app/systemsettings');
     }
 });
 
@@ -50,7 +50,7 @@ router.get('/app/logout', function(req, res) {
     req.logout();
     req.flash('success_msg', 'You are logged out');
 
-    res.redirect('/');
+    res.status(200).redirect('/');
 });
 
 module.exports = router;

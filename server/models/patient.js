@@ -44,23 +44,5 @@ var PatientSchema = mongoose.Schema({
 	}
 });
 
-/*
-	Compute the score of a patient
-*/
-function computeScore(arrayDiseases) {
-    var score = 0;
-	if (arrayDiseases !== null && arrayDiseases !== undefined) {
-		if (arrayDiseases instanceof Array) {
-			for (var i = 0; i<arrayDiseases.length; ++i) {
-				if (scoreOfDisease[arrayDiseases[i]] > score) {
-					score = scoreOfDisease[arrayDiseases[i]];
-				}
-			}
-		}
-	}
-
-    return score;
-}
-
 var Patient = mongoose.model('Patient', PatientSchema);
-module.exports = {Patient, computeScore};
+module.exports = {Patient};

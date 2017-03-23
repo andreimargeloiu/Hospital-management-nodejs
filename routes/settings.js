@@ -6,7 +6,7 @@ const router = express.Router();
 var {scoreOfDisease, Disease} = require('./../server/models/diseases.js');
 
 router.get('/app/systemsettings', (req, res) => {
-    res.render('systemsettings', {pageTitle: "System settings"});
+    res.status(200).render('systemsettings', {pageTitle: "System settings"});
 });
 
 module.exports = router;
