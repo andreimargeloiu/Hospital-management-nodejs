@@ -57,7 +57,7 @@ router.post('/app/adddisease', (req, res) => {
             res.status(400).redirect('/app/systemsettings');
         });
     } else {
-        res.status(400).redirect('/app/systemsettings');
+        res.status(400).redirect('/app/systemsettings',{messages: req.flash('success_msg', 'Succesful test') });
     }
 });
 

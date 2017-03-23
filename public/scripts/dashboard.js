@@ -8,17 +8,20 @@ $(document).ready(function() {
   $.getJSON(patientsAPI).done(function(patients) {
 	  var roomsAPI = "http://localhost:3000/app/getrooms";
 	  $.getJSON(roomsAPI).done(function(rooms1) {
-	  	  for(var room in rooms1["rooms"]) {
+
+          // iterate through all rooms
+	  	  for(var room in rooms1) {
 		  	  var freeRoomsRowConstructor = [];
 
-		  	  if(rooms1["rooms"][room] === false) {
+              if (room === 'noroom') {
+                  freeRoomsRowConstructor.push("Waiting list");
+		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
+              } else if(rooms1[room] === false) {
+                  console.log(room, rooms1[room]);
 		  	  	  freeRoomsRowConstructor.push(room);
 		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
 		  	  }
 		  }
-
-		  console.log(freeRoomsRowConstructor);
-		  console.log(freeRoomsTableConstructor);
 
 		  for(var i = 0; i < patients.length; i++) {
 			  var patient = patients[i];
@@ -27,7 +30,7 @@ $(document).ready(function() {
 			  patientsRowConstructor.push(patient["hospitalNumber"]);
 			  patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
 
-			  if(patient["room"] === "no room") {
+			  if(patient["room"] === "noroom") {
 			  	  patientsRowConstructor.push(patient["score"]);
 
 			  	  patientsWaitingTableConstructor.push(patientsRowConstructor);
@@ -106,14 +109,12 @@ $(document).ready(function() {
             var patientsWaitingDashboard = patientsWaitingTableConstructor.length || 0;
             $("#patients-waiting-live").html(patientsWaitingDashboard);
 
-            var freeRoomsDashboard = freeRoomsTableConstructor.length || 0;
-            $("#free-rooms-live").html(freeRoomsDashboard);
+            var freeRoomsDashboard = freeRoomsTableConstructor.length || 1;
+            $("#free-rooms-live").html(freeRoomsDashboard - 1);
 
 	  });
   });
 });
-
-
 
 $("body").on('click', '#patients-in-hospital > tbody > tr', function()
 {

@@ -24,6 +24,7 @@ var PatientSchema = mongoose.Schema({
 	},
 	hospitalNumber: {
 		type: String,
+		unique: true,
 		default: '134574806'
 	},
 	diseases: {
@@ -36,7 +37,7 @@ var PatientSchema = mongoose.Schema({
     },
 	room: {
 		type: String,
-		default: 'no room'
+		default: 'noroom'
 	},
 	updated: {
 		type: Date,

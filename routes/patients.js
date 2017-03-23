@@ -32,55 +32,54 @@ router.post('/app/addpatient', (req, res) => {
         if (_.isEmpty(req.body.lastName)) req.flash('error_msg', 'Please enter the last name.');
         if (_.isEmpty(req.body.hospitalNumber)) req.flash('error_msg', 'Please enter the hospital number.');
         res.status(400).redirect('/app/addpatient');
-    }
-
-    // set the sex of the new patient
-    var sex = req.body.sex;
-    if (sex === "male") {
-        sex = true;
     } else {
-        sex = false;
-    }
+        // set the sex of the new patient
+        var sex = req.body.sex;
+        if (sex === "male") {
+            sex = true;
+        } else {
+            sex = false;
+        }
 
-    // make a new patient and add it in the database
-    var patient = Patient({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        sex: sex,
-        hospitalNumber: req.body.hospitalNumber,
-        diseases: PD
-    });
+        // make a new patient and add it in the database
+        var patient = Patient({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            sex: sex,
+            hospitalNumber: req.body.hospitalNumber,
+            diseases: PD
+        });
 
+        // save the patient and compute his score
+        Promise.all([patient.save(), Disease.find({})])
+            .then((data) => {
+                var patient = data[0];
+                var diseases = data[1];
 
-    // save the patient and compute his score
-    Promise.all([patient.save(), Disease.find({})])
-        .then((data) => {
-            var patient = data[0];
-            var diseases = data[1];
+                var scoreOfDisease = {};
+                var score = 0;
 
-            var scoreOfDisease = {};
-            var score = 0;
+                if (! _.isEmpty(diseases) && _.isArray(diseases)) {
+                    // create a hashmap with the diseases and their scores
+                    for (var i = 0; i < diseases.length; ++i) {
+                        scoreOfDisease[diseases[i].name] = diseases[i].score;
+                    }
 
-            if (! _.isEmpty(diseases) && _.isArray(diseases)) {
-                // create a hashmap with the diseases and their scores
-                for (var i = 0; i < diseases.length; ++i) {
-                    scoreOfDisease[diseases[i].name] = diseases[i].score;
+                	for (var i=0; i<patient.diseases.length; ++i) {
+                       if (scoreOfDisease[patient.diseases[i]] > score) {
+                			score = scoreOfDisease[patient.diseases[i]];
+                		}
+                	}
                 }
 
-            	for (var i=0; i<patient.diseases.length; ++i) {
-                   if (scoreOfDisease[patient.diseases[i]] > score) {
-            			score = scoreOfDisease[patient.diseases[i]];
-            		}
-            	}
-            }
-
-            patient.score = score;
-            patient.save();
-            res.status(200).redirect('/app');
-        }).catch((err) => {
-            console.log(err);
-            res.status(400).redirect('/app');
-        })
+                patient.score = score;
+                patient.save();
+                res.status(200).redirect('/app');
+            }).catch((err) => {
+                console.log(err);
+                res.status(400).redirect('/app');
+            });
+    }
 });
 
 /*
@@ -198,5 +197,8 @@ router.get('/app/deletepatient/:hospitalNumber', (req, res) => {
         res.status(400).redirect('/app');
     });
 });
+
+
+
 
 module.exports = router;

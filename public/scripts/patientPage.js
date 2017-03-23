@@ -26,8 +26,8 @@ $(document).ready(function() {
 /*
       Room of the patient
 */
-       if (patient["room"] === "no room") {
-           $("#patient-room").text('No room');
+       if (patient["room"] === "noroom") {
+           $("#patient-room").text('No room assigned');
        } else {
            $("#patient-room").text('Room: ' + patient["room"]);
        }
