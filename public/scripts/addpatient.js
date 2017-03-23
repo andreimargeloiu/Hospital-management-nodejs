@@ -30,7 +30,7 @@ $(document).ready(function() {
                                                                               title: "Diagnosis"
                                                                           },
                                                                       ],
-                                                                      scrollY: '60vh',
+                                                                      scrollY: '50vh',
                                                                       scrollCollapse: true,
                                                                       paging: false,
                                                                       info: false,

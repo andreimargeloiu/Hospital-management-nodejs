@@ -1,11 +1,36 @@
 <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 
-<div class="row">
     <!-- Diseases manager -->
     <div class="col-md-6 col-lg-6">
+        <!-- Add new user -->
+        <div class="row">
+            <h4 style="margin-top:0px">Add a new user</h4>
+
+            <div>
+                <form method="post" action="/app/adduser" center="true">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Username</label>
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <input class="form-control" style="width: 100%;" type="text" name="username" placeholder="Enter username...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Password</label>
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <input class="form-control" style="width: 100%;" type="password" name="password" placeholder="Enter password...">
+                        </div>
+                    </div>
+                    <button type="submit" style="float: right;" class="btn btn-primary">Add user</button>
+                </form>
+            </div>
+        </div>
+
+        <hr style="border-top: dotted 1px;" />
+
         <!-- Add new disease -->
         <div class="row">
+            <h4 style="margin-top: 0px;">Add new disease in the system</h4>
             <form action="/app/adddisease" method="post">
                 <div class="form-group row">
                     <label class="col-sm-3 col-md-3 col-lg-3 col-form-label">Disease name</label>
@@ -26,11 +51,11 @@
             </form>
         </div>
 
-
         <hr style="border-top: dotted 1px;" />
 
         <!-- Update current diseases -->
         <div class="row">
+            <h4 style="margin-top: 0px;">Edit diseases in the system</h4>
             <form action="/app/deletediseases" method="post">
                 <table id="diseases-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <!-- JavaScript works here! -->
@@ -39,35 +64,8 @@
                 <input class="btn btn-danger" style="position: absolute; right: 0;" type="Submit" name="Submit" value="Delete diseases">
             </form>
         </div>
-
     </div>
 
-    <!-- Add new users -->
-    <div class="col-sm-6 col-md-6 col-lg-6">
-        <div class="row">
-
-        </div>
-		<h3 style="margin-top:0px">Add a new user</h3>
-
-	    <div>
-	        <form method="post" action="/app/adduser" center="true">
-				<div class="form-group row">
-   	             	<label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Username</label>
-   	             	<div class="col-sm-10 col-md-10 col-lg-10">
-   	                 	<input class="form-control" style="width: 100%;" type="text" name="username" placeholder="Enter username...">
-   	             	</div>
-   	         	</div>
-				<div class="form-group row">
-   				 	<label class="col-sm-2 col-md-2 col-lg-2 col-form-label">Password</label>
-   				 	<div class="col-sm-10 col-md-10 col-lg-10">
-   					 	<input class="form-control" style="width: 100%;" type="password" name="password" placeholder="Enter password...">
-   				 	</div>
-   			 	</div>
-	          	<button type="submit" style="float: right;" class="btn btn-primary">Add user</button>
-	        </form>
-	    </div>
-	</div>
-</div>
 
 
 <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
