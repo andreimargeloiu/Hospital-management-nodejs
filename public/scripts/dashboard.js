@@ -17,7 +17,6 @@ $(document).ready(function() {
                   freeRoomsRowConstructor.push("Waiting list");
 		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
               } else if(rooms1[room] === false) {
-                  console.log(room, rooms1[room]);
 		  	  	  freeRoomsRowConstructor.push(room);
 		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
 		  	  }
@@ -45,11 +44,14 @@ $(document).ready(function() {
 		  $('#patients-waiting').dataTable({
 		       data: patientsWaitingTableConstructor,
 		       columns: [{
-		       	   title: "Hospital no."
+		       	   title: "Hospital no.",
+                   width: "40%"
 		       }, {
-		           title: "Name"
+		           title: "Name",
+                   width: "50%"
 		       }, {
-		           title: "Score"
+		           title: "Score",
+                   width: "10%"
 		       }],
 		       scrollY: '60vh',
 		       scrollCollapse: true,
@@ -59,19 +61,38 @@ $(document).ready(function() {
                language: {
                  searchPlaceholder: "Search patient waiting...",
                  sSearch: ""
+               },
+               aaSorting: [[2, 'desc']],
+               fnCreatedRow: function(nRow, aData, iDisplayIndex) {
+                    // nRow - this is the HTML element of the row
+                    // aData - array of the data in the columns. Get column 4 data: aData[3]
+                    // iDataIndex - row index in the table
+
+                   // color the Score field
+                   if (aData[2] >= 35) { // red
+                       $('td:eq(2)', nRow).css("background-color", "#ffad99");
+                   } else if (aData[2] >=20) { // orange
+                       $('td:eq(2)', nRow).css("background-color", "#ffdd99");
+                   } else if (aData[2] >= 10) { // yellow
+                       $('td:eq(2)', nRow).css("background-color", "#ffffcc");
+                   }
                }
 		   });
 
 		  $('#patients-in-hospital').DataTable({
    				data: patientsInHospitalTableConstructor,
 		        columns:[{
-	                title: "Hospital no."
+	                title: "Hospital no.",
+                     width: "30%"
 	            },{
-	           	    title: "Name"
+	           	    title: "Name",
+                     width: "40%"
 	            },{
-	           	    title: "Room"
+	           	    title: "Room",
+                     width: "15%"
 	            },{
-	           	    title: "Score"
+	           	    title: "Score",
+                     width: "15%"
 	            }],
 		        scrollY: '60vh',
 		        scrollCollapse: true,
@@ -81,6 +102,21 @@ $(document).ready(function() {
                 language: {
                   searchPlaceholder: "Search patient in room...",
                   sSearch: ""
+                },
+                aaSorting: [[3, 'desc']],
+                fnCreatedRow: function(nRow, aData, iDisplayIndex) {
+                     // nRow - this is the HTML element of the row
+                     // aData - array of the data in the columns. Get column 4 data: aData[3]
+                     // iDataIndex - row index in the table
+
+                    // color the Score field
+                    if (aData[3] >= 35) { // red
+                        $('td:eq(3)', nRow).css("background-color", "#ffad99");
+                    } else if (aData[3] >=20) { // orange
+                        $('td:eq(3)', nRow).css("background-color", "#ffdd99");
+                    } else if (aData[3] >= 10) { // yellow
+                        $('td:eq(3)', nRow).css("background-color", "#ffffcc");
+                    }
                 }
             });
 
@@ -101,7 +137,6 @@ $(document).ready(function() {
               }
 		  });
 
-
             //   Set dashboard data in the three boxes on the top
             var patientsWithRoomsDashboard = patientsInHospitalTableConstructor.length || 0;
             $("#patients-with-rooms-live").html(patientsWithRoomsDashboard);
@@ -114,6 +149,14 @@ $(document).ready(function() {
 
 	  });
   });
+});
+
+$("#patients-waiting").ready(function() {
+    $("#patients-waiting > tbody > tr").select(function() {
+        $(this).children('td')[3].css({"backgroung-colour": "yellow"});
+
+        alert( "Handler for .select() called." );
+    });
 });
 
 $("body").on('click', '#patients-in-hospital > tbody > tr', function()
