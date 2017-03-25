@@ -13,10 +13,7 @@ $(document).ready(function() {
 	  	  for(var room in rooms1) {
 		  	  var freeRoomsRowConstructor = [];
 
-              if (room === 'noroom') {
-                  freeRoomsRowConstructor.push("Waiting list");
-		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
-              } else if(rooms1[room] === false) {
+              if (room !== 'noroom' && rooms1[room] === false) {
 		  	  	  freeRoomsRowConstructor.push(room);
 		  	  	  freeRoomsTableConstructor.push(freeRoomsRowConstructor);
 		  	  }
@@ -58,10 +55,10 @@ $(document).ready(function() {
 		       paging: false,
 		       resposnive: true,
 		       info: false,
-               language: {
-                 searchPlaceholder: "Search patient waiting...",
-                 sSearch: ""
-               },
+                 language: {
+                   searchPlaceholder: "Search patient waiting...",
+                   sSearch: ""
+                 },
                aaSorting: [[2, 'desc']],
                fnCreatedRow: function(nRow, aData, iDisplayIndex) {
                     // nRow - this is the HTML element of the row
@@ -83,10 +80,10 @@ $(document).ready(function() {
    				data: patientsInHospitalTableConstructor,
 		        columns:[{
 	                title: "Hospital no.",
-                     width: "30%"
+                     width: "25%"
 	            },{
 	           	    title: "Name",
-                     width: "40%"
+                     width: "45%"
 	            },{
 	           	    title: "Room",
                      width: "15%"
@@ -144,8 +141,8 @@ $(document).ready(function() {
             var patientsWaitingDashboard = patientsWaitingTableConstructor.length || 0;
             $("#patients-waiting-live").html(patientsWaitingDashboard);
 
-            var freeRoomsDashboard = freeRoomsTableConstructor.length || 1;
-            $("#free-rooms-live").html(freeRoomsDashboard - 1);
+            var freeRoomsDashboard = freeRoomsTableConstructor.length || 0;
+            $("#free-rooms-live").html(freeRoomsDashboard);
 
 	  });
   });

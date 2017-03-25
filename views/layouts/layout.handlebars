@@ -19,7 +19,6 @@
     <!-- Custom Theme JavaScript -->
     <script src="/js/startmin.js"></script>
 
-
     <title>NHS patients</title>
 
     <!-- Bootstrap Core CSS -->
@@ -117,10 +116,18 @@
                    <div class="alert alert-danger">{{error}}</div>
                  {{/if}}
 
+                 {{#if message}}
+                     <div class="alert alert-danger">{{message}}</div>
+                 {{/if}}
+
+                 {{#each errors}}
+                     <div class="alert alert-danger">{{message}}</div>
+                 {{/each}}
+                 
                 <!-- ... Your content goes here ... -->
                 {{{body}}}
             </div>
         </div>
     </div>
-</body> 
+</body>
 </html>

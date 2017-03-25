@@ -20,6 +20,7 @@
     "express-session": "^1.15.1",
     "express-validator": "^3.1.2",
     "hbs": "^4.0.1",
+    "is-valid-date": "0.0.1",
     "lodash": "^4.17.4",
     "mongodb": "^2.2.24",
     "mongoose": "^4.8.5",

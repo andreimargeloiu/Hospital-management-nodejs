@@ -1,0 +1,23 @@
+{
+  "name": "is-valid-date",
+  "main": "is-valid-date.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/miguelmota/is-valid-date",
+  "authors": [
+    "Miguel Mota <miguelmota2@gmail.com>"
+  ],
+  "description": "Validate date string",
+  "keywords": [
+    "validate",
+    "validator",
+    "date"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "license": "MIT"
+}

@@ -14,6 +14,7 @@ const router = express.Router();
 var {scoreOfDisease, Disease} = require('./../server/models/diseases.js');
 var {Patient} = require('./../server/models/patient.js');
 var {rooms, assignRoom, unassignRoom} = require('./../server/models/rooms.js');
+var isValidDate = require('is-valid-date');
 const {ObjectID} = require('mongodb');
 
 /*
@@ -22,15 +23,22 @@ const {ObjectID} = require('mongodb');
 router.post('/app/addpatient', (req, res) => {
     // receive the diseases from the form in the array PD, each element being a String with the disease name
     var PD = req.body.PD;
+    var dateOfBirth = req.body.dateOfBirth;
+
+    console.log(dateOfBirth);
+    console.log(isValidDate(dateOfBirth));
+
     if (_.isEmpty(PD)) {    // check if no disease is selected
         PD = [];
     }
 
     // Check for empty fields
-    if (_.isEmpty(req.body.firstName) || _.isEmpty(req.body.lastName) || _.isEmpty(req.body.hospitalNumber)) {
+    if (_.isEmpty(req.body.firstName) || _.isEmpty(req.body.lastName) || _.isEmpty(req.body.hospitalNumber) || !isValidDate(dateOfBirth)) {
         if (_.isEmpty(req.body.firstName)) req.flash('error_msg', 'Please enter the first name.');
         if (_.isEmpty(req.body.lastName)) req.flash('error_msg', 'Please enter the last name.');
         if (_.isEmpty(req.body.hospitalNumber)) req.flash('error_msg', 'Please enter the hospital number.');
+        if (!isValidDate(dateOfBirth)) req.flash('error_msg', 'The date is not valid.');
+
         res.status(400).redirect('/app/addpatient');
     } else {
         // set the sex of the new patient
@@ -43,10 +51,11 @@ router.post('/app/addpatient', (req, res) => {
 
         // make a new patient and add it in the database
         var patient = Patient({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            firstName: _.capitalize(req.body.firstName),
+            lastName: _.capitalize(req.body.lastName),
             sex: sex,
-            hospitalNumber: req.body.hospitalNumber,
+            dateOfBirth: dateOfBirth,
+            hospitalNumber: _.toUpper(req.body.hospitalNumber),
             diseases: PD
         });
 

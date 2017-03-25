@@ -13,7 +13,10 @@ $(document).ready(function() {
        $("#first-name-disabled").attr("placeholder", patient["firstName"]);
        $("#last-name-disabled").attr("placeholder", patient["lastName"]);
        $("#hospitalNumber-disabled").attr("placeholder", patient["hospitalNumber"]);
+       $("#date-of-birth-disabled").attr("placeholder", patient["dateOfBirth"]);
        $("#patient-score").html(patient["score"]);
+
+
 /*
        Sex of the patient
 */
@@ -27,9 +30,12 @@ $(document).ready(function() {
       Room of the patient
 */
        if (patient["room"] === "noroom") {
-           $("#patient-room").text('No room assigned');
+           $("#patient-room-disabled").attr("placeholder", 'No room assigned');
        } else {
-           $("#patient-room").text('Room: ' + patient["room"]);
+           $("#patient-room-disabled").attr("placeholder", 'Room: ' + patient["room"]);
+
+           var patientDeleteRoomLink = "/app/updateroom/" + hospitalNumber[3] + "/noroom";
+           $("#patient-room-disabled").after("<a id=\"delete-room-button\" class=\"btn btn-primary btn-lg btn-block\" href=\"" + patientDeleteRoomLink +"\">Move to waiting list</a>");
        }
 
 /*
