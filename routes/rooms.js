@@ -1,8 +1,9 @@
 /*
-    POST /app/updateroom                             -> put's patient hospitalNumber in the room roomName
-    GET /app/getrooms                                -> return JSON with all rooms status in the system
-    POST /app/addroom                                -> add a new room in the system
-    POST /app/deleteroom                             -> delete a disease from the system
+    GET  /app/updateroom/:hospitalNumber/:futureRoom'            -> put's patient hospitalNumber in the room roomName
+    GET /app/swappatients/:patientWithRoom/:patientWithoutRoom   -> swap the rooms of two patients
+    GET  /app/getrooms                                           -> return JSON with all rooms status in the system
+    POST /app/addroom                                            -> add a new room in the system
+    POST /app/deleteroom                                         -> delete a disease from the system
 */
 const express = require('express');
 const _ = require('lodash');
@@ -34,32 +35,30 @@ router.get('/app/getrooms', (req, res) => {
 });
 
 /*
-    POST /app/updateroom
+    GET /app/updateroom -> update the room of one patient
 */
-router.post('/app/updateroom/', (req, res) => {
-    var hospitalNumber = req.body.hospitalNumber;
-    var futureRoom = req.body.futureRoom;
-    var redirect = req.body.redirect;
+router.get('/app/updateroom/:hospitalNumber/:futureRoom', (req, res) => {
+    var hospitalNumber = req.params.hospitalNumber;
+    var futureRoom = req.params.futureRoom;
 
-    var promise = new Promise(function(resolve, reject) {
-         console.log("redirect from promise");
-         resolve(redirect);
-     });
+    // var promise = new Promise(function(resolve, reject) {
+    //      console.log("redirect from promise");
+    //      resolve(redirect);
+    //  });
 
     // 1. Check if the currentRoom is empty
     // 2. unassign the current room of the patient
     // 3. assign him to the current room
 
-    Promise.all([Room.find({}), Room.findOne({name: futureRoom}), Patient.findOne({hospitalNumber: hospitalNumber}), promise.then(function(redirect) { return redirect; })])
+    Promise.all([Room.find({}), Room.findOne({name: futureRoom}), Patient.findOne({hospitalNumber: hospitalNumber})])
         .then((data) => {
             var rooms = data[0];
             var futureRoomObject = data[1];
             var patient = data[2];
-            var redirect = data[3];
 
 
                 // 1. Check if the currentRoom is empty
-            if (rooms && patient && futureRoomObject && futureRoomObject["availability"] === false && (redirect === 'yes' || redirect === 'no')) {  // check that all the parameters were OK
+            if (rooms && patient && futureRoomObject && futureRoomObject["availability"] === false) {  // check that all the parameters were OK
                 // 2. unassign the current room of the patient
                 if (patient.room !== 'noroom') {
                     for (var i = 0; i < rooms.length; ++i) {
@@ -87,7 +86,7 @@ router.post('/app/updateroom/', (req, res) => {
                         }
                     }
                 }
-                if (redirect === 'yes') res.status(200).redirect('/app');
+                res.redirect('/app');
             } else {
                 throw Error("Bad request to change the room. Check the parameters.");
             }
@@ -97,6 +96,42 @@ router.post('/app/updateroom/', (req, res) => {
         });
 });
 
+/*
+    GET /app/swappatients/:patientWithRoom/:patientWithoutRoom -> swap the rooms of two patients
+*/
+router.get('/app/swappatients/:patientWithRoom/:patientWithoutRoom', (req, res) => {
+    var patientWithRoom = req.params.patientWithRoom;
+    var patientWithoutRoom = req.params.patientWithoutRoom;
+
+    // 1. Unassign the current room of the patientWithRoom
+    // 2. Assign noroom to patientWithRoom
+    // 3. Assign the room to patientWithoutRoom
+
+    Promise.all([Patient.findOne({hospitalNumber: patientWithRoom}), Patient.findOne({hospitalNumber: patientWithoutRoom})])
+        .then((data) => {
+            var patientWithRoom = data[0];
+            var patientWithoutRoom = data[1];
+
+                // Check if the patients have room and not have a room
+            if (patientWithRoom && patientWithoutRoom && patientWithRoom["room"] !== 'noroom' && patientWithoutRoom["room"] === 'noroom') {  // check that all the parameters were OK
+                // 1. Unassign the current room of the patientWithRoom
+                var roomOfPatient = patientWithRoom["room"];
+
+                patientWithRoom.room = "noroom";
+                patientWithRoom.save();
+
+                patientWithoutRoom.room = roomOfPatient;
+                patientWithoutRoom.save();
+
+                res.redirect('/app');
+            } else {
+                throw Error("Bad request to change the room. Check the parameters.");
+            }
+        }).catch((err) => {
+            console.log(err);
+            res.redirect('/app');
+        });
+});
 
 /*
     POST /app/addroom -> add a new room in the system
