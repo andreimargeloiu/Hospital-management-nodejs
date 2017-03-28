@@ -1,8 +1,8 @@
 /*
-    GET /app/updateroom/:hospitalNumber/:futureRoom  -> put's patient hospitalNumber in the room roomName
+    POST /app/updateroom                             -> put's patient hospitalNumber in the room roomName
     GET /app/getrooms                                -> return JSON with all rooms status in the system
     POST /app/addroom                                -> add a new room in the system
-    POST /app/deleteromm                             -> delete a disease from the system
+    POST /app/deleteroom                             -> delete a disease from the system
 */
 const express = require('express');
 const _ = require('lodash');
@@ -34,7 +34,7 @@ router.get('/app/getrooms', (req, res) => {
 });
 
 /*
-    GET /app/updateroom/hospitalNumber/roomName
+    POST /app/updateroom
 */
 router.post('/app/updateroom/', (req, res) => {
     var hospitalNumber = req.body.hospitalNumber;
@@ -135,6 +135,16 @@ router.post('/app/deleterooms', (req, res) => {
                 name: roomsToDelete[i]
             }).remove().catch((err) => {
                 console.log(err);
+            });
+
+            Patient.findOneAndUpdate({
+                 room: roomsToDelete[i]
+            }, {
+                 "$set": {
+                   "room": "noroom",
+               }
+          }).catch((err) => {
+                 console.log(err);
             });
         }
         res.status(200).redirect('/app/systemsettings');

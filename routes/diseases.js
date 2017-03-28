@@ -69,14 +69,51 @@ router.post('/app/deletediseases', (req, res) => {
 
     if (_.isArray(diseasesToDelete)) {
         for (var i = 0; i < diseasesToDelete.length; ++i) {
+            // 1. Delete the disease from the system
+            var disease = diseasesToDelete[i];
             Disease.find({
                 name: diseasesToDelete[i]
             }).remove().catch((err) => {
                 console.log(err);
             });
+
+            var promise = new Promise ((resolve, reject) => {
+                 resolve(disease);
+                 reject(disease);
+            });
+
+            // 2. Update all patients
+            Promise.all([promise.then(function (disease) { return disease; }), Patient.find({ diseases: disease })])
+                 .then((data) => {
+                     var diseaseToDel = data[0];
+                     console.log(diseaseToDel);
+                     var patients = data[1];
+
+                     for (var i = 0; i < patients.length; ++i) {
+                          var patient = patients[i];
+                          var newDiseases = [];
+
+                          // delete the diseases from the patient diseases array
+                          for (var j = 0; j < patient.diseases.length; ++j)
+                              if (patient.diseases[j] !== diseaseToDel) {
+                                   newDiseases.push(patient.diseases[j]);
+                              }
+
+                          patient.diseases = newDiseases;
+
+                          patient.save().then((patient) => {
+                               patient.updateScore();
+                          }).catch((err) => {
+                               console.log(err);
+                          });
+                     }
+                 }).catch((err) => {
+                      console.log(err);
+                 });
         }
         res.status(200).redirect('/app/systemsettings');
     } else {
+        console.log("POST /app/deletedisease, diseasesToDelete is not an array");
         res.status(400).redirect('/app/systemsettings');
     }
 });

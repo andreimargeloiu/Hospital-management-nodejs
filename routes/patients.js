@@ -25,8 +25,8 @@ router.post('/app/addpatient', (req, res) => {
     var PD = req.body.PD;
     var dateOfBirth = req.body.dateOfBirth;
 
-    console.log(dateOfBirth);
-    console.log(isValidDate(dateOfBirth));
+    // console.log(dateOfBirth);
+    // console.log(isValidDate(dateOfBirth));
 
     if (_.isEmpty(PD)) {    // check if no disease is selected
         PD = [];
@@ -56,39 +56,18 @@ router.post('/app/addpatient', (req, res) => {
             sex: sex,
             dateOfBirth: dateOfBirth,
             hospitalNumber: _.toUpper(req.body.hospitalNumber),
-            diseases: PD
+            diseases: PD,
+            lastUpdate: (new Date().getTime())
         });
 
-        // save the patient and compute his score
-        Promise.all([patient.save(), Disease.find({})])
-            .then((data) => {
-                var patient = data[0];
-                var diseases = data[1];
-
-                var scoreOfDisease = {};
-                var score = 0;
-
-                if (! _.isEmpty(diseases) && _.isArray(diseases)) {
-                    // create a hashmap with the diseases and their scores
-                    for (var i = 0; i < diseases.length; ++i) {
-                        scoreOfDisease[diseases[i].name] = diseases[i].score;
-                    }
-
-                	for (var i=0; i<patient.diseases.length; ++i) {
-                       if (scoreOfDisease[patient.diseases[i]] > score) {
-                			score = scoreOfDisease[patient.diseases[i]];
-                		}
-                	}
-                }
-
-                patient.score = score;
-                patient.save();
-                res.status(200).redirect('/app');
-            }).catch((err) => {
-                console.log(err);
-                res.status(400).redirect('/app');
-            });
-    }
+        patient.save().then((patient) => {
+            patient.updateScore();
+            res.status(200).redirect('/app');
+        }).catch((err) => {
+            console.log(err);
+            res.status(400).redirect('/app');
+        });
+   }
 });
 
 /*
@@ -149,47 +128,22 @@ router.post('/app/updatepatient/:hospitalNumber', (req, res) => {
         PD = [];
     }
 
-    // update the diseases of the patient
     Patient.findOneAndUpdate({
         hospitalNumber
     }, {
         "$set": {
             "diseases": PD,
-        }
+            "lastUpdate": (new Date().getTime())
+         }
+    },{
+        new: true
+    }).then((patient) => {
+        patient.updateScore();
+        res.redirect('/app/patient/' + hospitalNumber);
     }).catch((err) => {
         console.log(err);
+        res.redirect('/app/patient/' + hospitalNumber);
     });
-
-    // now update the score of the patient
-    Promise.all([Patient.find({ hospitalNumber: hospitalNumber }), Disease.find({})])
-        .then((data) => {
-            var patient = data[0][0];
-            var diseases = data[1];
-
-            var scoreOfDisease = {};
-            var score = 0;
-
-            if (! _.isEmpty(diseases) && _.isArray(diseases)) {
-                // create a hashmap with the diseases and their scores
-                for (var i = 0; i < diseases.length; ++i) {
-                    scoreOfDisease[diseases[i].name] = diseases[i].score;
-                }
-
-            	for (var i=0; i<patient.diseases.length; ++i) {
-                   if (scoreOfDisease[patient.diseases[i]] > score) {
-            			score = scoreOfDisease[patient.diseases[i]];
-            		}
-            	}
-            }
-
-            patient.score = score;
-            patient.save();
-
-            res.status(200).redirect('/app/patient/' + hospitalNumber);
-        }).catch((err) => {
-            cosole.log(err);
-            res.status(400).redirect('/app/patient/' + hospitalNumber);
-        });
 });
 
 /*

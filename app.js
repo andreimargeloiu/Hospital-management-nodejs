@@ -115,6 +115,12 @@ app.use('/', settings);
 app.use('/', diseases);
 app.use('/', rooms);
 
+var timestamp = new Date().getTime();
+console.log(timestamp);
+console.log(typeof(timestamp));
+
+
+
 /*
     Fire the server online
 */

@@ -1,3 +1,4 @@
+
 var patientsWaitingTableConstructor = [];
 var patientsInHospitalTableConstructor = [];
 var freeRoomsTableConstructor = [];
@@ -24,7 +25,20 @@ $(document).ready(function() {
 
 			  var patientsRowConstructor = [];
 			  patientsRowConstructor.push(patient["hospitalNumber"]);
-			  patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
+
+                 var actualTime = new Date().getTime();
+                 var timeDifference = actualTime - patient.lastUpdate;
+
+                 var timeDifferenceInMinutes = Math.abs(timeDifference) / 60 / 1000;
+
+                 // check if he need to be updated
+                 // @@@@@@@@@@@@@@@@@@@@@@@@@@ -> need to change the time for the interval to be updated
+                 if (timeDifferenceInMinutes > 2) {
+                    patientsRowConstructor.push("<span class=\"glyphicon glyphicon-warning-sign\" style=\"color: red;\"></span>   " + patient["firstName"] + " " + patient["lastName"]);
+               } else {
+                    patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
+               }
+
 
 			  if(patient["room"] === "noroom") {
 			  	  patientsRowConstructor.push(patient["score"]);
@@ -41,14 +55,14 @@ $(document).ready(function() {
 		  $('#patients-waiting').dataTable({
 		       data: patientsWaitingTableConstructor,
 		       columns: [{
-		       	   title: "Hospital no.",
-                   width: "40%"
+		       	 title: "<span class=\"fa fa-hospital-o fa-fw\" style=\"color: black;\"></span>   " + "  no.",
+                     width: "30%"
 		       }, {
 		           title: "Name",
-                   width: "50%"
+                     width: "60%"
 		       }, {
 		           title: "Score",
-                   width: "10%"
+                     width: "10%"
 		       }],
 		       scrollY: '60vh',
 		       scrollCollapse: true,
@@ -77,18 +91,18 @@ $(document).ready(function() {
 		   });
 
 		  $('#patients-in-hospital').DataTable({
-   				data: patientsInHospitalTableConstructor,
+   			   data: patientsInHospitalTableConstructor,
 		        columns:[{
-	                title: "Hospital no.",
+	                title: "<span class=\"fa fa-hospital-o fa-fw\" style=\"color: black;\"></span>   " + "  no.",
                      width: "25%"
 	            },{
-	           	    title: "Name",
+	                title: "Name",
                      width: "45%"
 	            },{
-	           	    title: "Room",
+	           	 title: "Room",
                      width: "15%"
 	            },{
-	           	    title: "Score",
+	           	 title: "Score",
                      width: "15%"
 	            }],
 		        scrollY: '60vh',
@@ -96,9 +110,9 @@ $(document).ready(function() {
 		        paging: false,
 		        resposnive: true,
 		        info: false,
-                language: {
-                  searchPlaceholder: "Search patient in room...",
-                  sSearch: ""
+                  language: {
+                       searchPlaceholder: "Search patient in room...",
+                       sSearch: ""
                 },
                 aaSorting: [[3, 'desc']],
                 fnCreatedRow: function(nRow, aData, iDisplayIndex) {
@@ -128,9 +142,9 @@ $(document).ready(function() {
 			  paging: false,
 			  resposnive: true,
 			  info: false,
-              language: {
-                searchPlaceholder: "Search room...",
-                sSearch: ""
+                language: {
+                     searchPlaceholder: "Search room...",
+                     sSearch: ""
               }
 		  });
 

@@ -56,7 +56,7 @@ $(document).ready(function() {
            var diseasesScoresCheckboxes = [];
 
            for(var disease in allDiseases) {
-               var diseaseScoreCheckbox = [];
+             var diseaseScoreCheckbox = [];
         	   diseaseScoreCheckbox[0] = disease;
         	   diseaseScoreCheckbox[1] = allDiseases[disease]; // This is the score.
 
@@ -67,15 +67,15 @@ $(document).ready(function() {
             	   	   	   input = "<input type=\"checkbox\" name=\"PD[]\" value=\"" + disease + "\" checked>";
             	   	   	   break;
             	   	   } else {
-            	   	       input = "<input type=\"checkbox\" name=\"PD[]\" value=\"" + disease + "\">";
+            	   	        input = "<input type=\"checkbox\" name=\"PD[]\" value=\"" + disease + "\">";
             	   	   }
             	   }
                } else {
                    input = "<input type=\"checkbox\" name=\"PD[]\" value=\"" + disease + "\">";
                }
 
-          	   diseaseScoreCheckbox[2] = input;
-        	   diseasesScoresCheckboxes.push(diseaseScoreCheckbox)
+          	diseaseScoreCheckbox[2] = input;
+        	     diseasesScoresCheckboxes.push(diseaseScoreCheckbox)
            }
 
            // Add name, sex, number, age before the table.
@@ -83,11 +83,11 @@ $(document).ready(function() {
 		      data: diseasesScoresCheckboxes,
 		      columns:[{
 	              title: "Disease"
-	          },{
+	           },{
 	              title: "Score"
-	          },{
+	           },{
 	              title: "Diagnosis"
-	          }],
+	           }],
 		      scrollY: '50vh',
 		      scrollCollapse: true,
 		      paging: false,
