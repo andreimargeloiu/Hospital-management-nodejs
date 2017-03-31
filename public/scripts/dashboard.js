@@ -1,3 +1,4 @@
+var URL = location.protocol + '//' + location.host;
 
 var patientsWaitingTableConstructor = [];
 var patientsInHospitalTableConstructor = [];
@@ -5,9 +6,9 @@ var freeRoomsTableConstructor = [];
 var dynamicTableClickable = true;
 
 $(document).ready(function() {
-  var patientsAPI = "http://localhost:3000/app/getpatients";
+  var patientsAPI = URL + "/app/getpatients";
   $.getJSON(patientsAPI).done(function(patients) {
-	  var roomsAPI = "http://localhost:3000/app/getrooms";
+	  var roomsAPI = URL + "/app/getrooms";
 	  $.getJSON(roomsAPI).done(function(rooms1) {
 
           // iterate through all rooms
@@ -165,23 +166,96 @@ $(document).ready(function() {
 $("#patients-waiting").ready(function() {
     $("#patients-waiting > tbody > tr").select(function() {
         $(this).children('td')[3].css({"backgroung-colour": "yellow"});
-
-        alert( "Handler for .select() called." );
     });
 });
 
-$("body").on('click', '#patients-in-hospital > tbody > tr', function()
-{
-    if(dynamicTableClickable)
-    {
+var clicks = 0;
+
+$(function() {
+    $("body").on("click", '#patients-in-hospital > tbody > tr', function(e){
+         var hospitalNumberToBeWaiting = $(this).children('td')[0];
+         hospitalNumberToBeWaiting = hospitalNumberToBeWaiting.textContent;
+         clicks++;
+         var clicks_when_called = clicks;
+
+           $("body").on('click', '#patients-waiting > tbody > tr', function() {
+             var hospitalNumberToBeAdmitted = $(this).children('td')[0];
+             hospitalNumberToBeAdmitted = hospitalNumberToBeAdmitted.textContent;
+             if (clicks_when_called + 1 === clicks) {
+                  if (confirm('Do you want to make the change?')) {
+                    window.location.href = URL + "/app/swappatients/" + hospitalNumberToBeWaiting + "/" + hospitalNumberToBeAdmitted;
+                  } else {
+                    window.location.href = URL +"/app/";
+                  }
+              }
+          });
+     });
+});
+
+$(function(){
+    $("body").on("click", '#patients-waiting > tbody > tr', function(e){
+         var hospitalNumberToBeAdmitted = $(this).children('td')[0];
+         hospitalNumberToBeAdmitted = hospitalNumberToBeAdmitted.textContent;
+         clicks++;
+
+           var clicks_when_called = clicks;
+           $("body").on('click', '#free-rooms > tbody > tr', function() {
+             var roomToBeOccupied = $(this).children('td')[0];
+             roomToBeOccupied = roomToBeOccupied.textContent;
+             if (clicks_when_called + 1 === clicks) {
+                  if (confirm('Do you want to make the change?')) {
+                    window.location.href = URL +"/app/updateroom/" + hospitalNumberToBeAdmitted + "/" + roomToBeOccupied;
+                  }
+                  else
+                  {
+                    window.location.href = URL + "/app/";
+                  }
+              }
+              $("body").on('click', '#patients-in-hospital > tbody > tr', function() {
+                  var hospitalNumberToBeWaiting = $(this).children('td')[0];
+                  hospitalNumberToBeWaiting = hospitalNumberToBeWaiting.textContent;
+
+                  if (clicks_when_called + 1 === clicks) {
+                       if (confirm('Do you want to make the change?')) {
+                         window.location.href = URL +"/app/swappatients/" + hospitalNumberToBeWaiting + "/" + hospitalNumberToBeAdmitted;
+                       } else {
+                         window.location.href = URL +"/app/";
+                       }
+                  }
+               });
+           });
+     });
+});
+
+$(function(){
+    $("body").on("click", '#free-rooms > tbody > tr', function(e){
+           var roomToBeOccupied = $(this).children('td')[0];
+           roomToBeOccupied = roomToBeOccupied.textContent;
+           clicks++;
+           var clicks_when_called = clicks;
+
+           $("body").on('click', '#patients-waiting > tbody > tr', function() {
+             var hospitalNumberToBeAdmitted = $(this).children('td')[0];
+             hospitalNumberToBeAdmitted = hospitalNumberToBeAdmitted.textContent;
+             if (clicks_when_called + 1 === clicks) {
+                  if (confirm('Do you want to make the change?')) {
+                    window.location.href = URL + "/app/updateroom/" + hospitalNumberToBeAdmitted + "/" + roomToBeOccupied;
+                  } else {
+                    window.location.href = URL + "/app/";
+                  }
+              }
+           });
+     });
+});
+
+$("body").on('dblclick', '#patients-in-hospital > tbody > tr', function() {
       var NHSnumber = $(this).children('td')[0];
       NHSnumber = NHSnumber.textContent;
-      window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
-    }
+      window.location.href = URL + "/app/patient/" + NHSnumber;
 });
-$("body").on('click', '#patients-waiting > tbody > tr', function()
-{
-	var NHSnumber = $(this).children('td')[0];
-	NHSnumber = NHSnumber.textContent;
-	window.location.href = "http://localhost:3000/app/patient/" + NHSnumber;
+
+$("body").on('dblclick', '#patients-waiting > tbody > tr', function() {
+     var NHSnumber = $(this).children('td')[0];
+     NHSnumber = NHSnumber.textContent;
+     window.location.href = URL + "/app/patient/" + NHSnumber;
 });

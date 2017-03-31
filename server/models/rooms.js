@@ -11,8 +11,8 @@ var RoomSchema = mongoose.Schema({
 	name: {
         type: String,
         unique: true,
-		required: true,
-		default: 'No room name'
+	   required: true,
+	   default: 'No room name'
     },
     availability: {
         type: Boolean,

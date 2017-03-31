@@ -1,11 +1,7 @@
-/*
-    Fucntion to create the table with diseases from the system
-*/
-var hostname = "http://localhost:3000/";
+var URL = location.protocol + '//' + location.host;
 
-// fill the diseases table
 $(document).ready(function() {
-    var diseasesAPI = hostname + "app/getdiseases/";
+    var diseasesAPI = URL + "/app/getdiseases/";
 
     $.getJSON(diseasesAPI).done(function(allDiseases) {
            var diseasesScoresCheckboxes = [];
@@ -46,7 +42,7 @@ $(document).ready(function() {
 
 // fill the rooms table
 $(document).ready(function() {
-    var roomsAPI = hostname + "app/getrooms/";
+    var roomsAPI = URL + "/app/getrooms/";
 
     $.getJSON(roomsAPI).done(function(allRooms) {
            var roomsScoresCheckboxes = [];

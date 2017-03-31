@@ -1,10 +1,12 @@
+var URL = location.protocol + '//' + location.host;
+
 $(document).ready(function() {
     var hospitalNumber= window.location.pathname.split('/');
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // Change the index of the array NHSnumbr when giving into production
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    var patientAPI = "http://localhost:3000/app/getpatient/" + hospitalNumber[3];
+    var patientAPI = URL + "/app/getpatient/" + hospitalNumber[3];
 
     $("#form-patient").attr("action", "/app/updatepatient/" + hospitalNumber[3]);
     $("#delete-button").attr("href", "/app/deletepatient/" + hospitalNumber[3]);
@@ -51,7 +53,7 @@ $(document).ready(function() {
            $("#panel-score").attr("class", "panel panel-red");
        }
 
-       var diseasesAPI = "http://localhost:3000/app/getdiseases";
+       var diseasesAPI = URL +"/app/getdiseases";
        $.getJSON(diseasesAPI).done(function(allDiseases) {
            var diseasesScoresCheckboxes = [];
 
