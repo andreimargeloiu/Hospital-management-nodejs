@@ -19,7 +19,7 @@ router.get('/app', (req, res) => {
     GET /app/addpatient -> go to addPatient page
 */
 router.get('/app/addpatient', (req, res) => {
-    res.status(200).render('addPatient', {pageTitle: "Add patient"});
+    res.render('addpatient', {pageTitle: "Add patient"});
 });
 
 module.exports = router;
