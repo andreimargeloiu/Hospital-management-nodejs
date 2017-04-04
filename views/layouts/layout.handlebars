@@ -7,6 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Do not allow zoom om mobile devices -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
     <!-- jQuery -->
     <script src="/js/jquery.min.js"></script>
 
@@ -123,7 +126,7 @@
                  {{#each errors}}
                      <div class="alert alert-danger">{{message}}</div>
                  {{/each}}
-                 
+
                 <!-- ... Your content goes here ... -->
                 {{{body}}}
             </div>

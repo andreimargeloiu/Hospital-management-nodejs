@@ -45,7 +45,7 @@ $(document).ready(function() {
 */
        if (patient["score"] <=5) {
            $("#panel-score").attr("class", "panel panel-primary");
-       } else if (patient["score"] <= 20) {
+       } else if (patient["score"] < 25) {
            $("#panel-score").attr("class", "panel panel-yellow");
        } else if (patient["score"] <= 35) {
            $("#panel-score").attr("class", "panel panel-orange");
@@ -90,11 +90,11 @@ $(document).ready(function() {
 	           },{
 	              title: "Diagnosis"
 	           }],
-		      scrollY: '50vh',
+		      scrollY: '40vh',
 		      scrollCollapse: true,
 		      paging: false,
-              info: false,
-              language: {
+                info: false,
+                language: {
                 sSearch: "Search disease"
               }
 		   });

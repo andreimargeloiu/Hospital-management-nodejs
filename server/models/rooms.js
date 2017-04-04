@@ -25,14 +25,6 @@ var Room = mongoose.model('Room', RoomSchema);
 
 var rooms = {};
 rooms["noroom"] = false;
-rooms["T01"] = false;
-rooms["T02"] = false;
-rooms["T03"] = false;
-rooms["T04"] = false;
-rooms["T05"] = false;
-rooms["T06"] = false;
-rooms["T07"] = false;
-rooms["T08"] = false;
 
 
 /*

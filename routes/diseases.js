@@ -45,7 +45,7 @@ router.post('/app/adddisease', (req, res) => {
     // check that the name is a String and score is a Number
     if (_.isString(diseaseName) && !_.isNaN(diseaseScore)) {
         var disease = Disease({
-            name: diseaseName,
+            name: _.capitalize(diseaseName),
             score: diseaseScore
         });
 
@@ -100,6 +100,7 @@ router.post('/app/deletediseases', (req, res) => {
                               }
 
                           patient.diseases = newDiseases;
+                          patient.lastUpdate = new Date().getTime();
 
                           patient.save().then((patient) => {
                                patient.updateScore();

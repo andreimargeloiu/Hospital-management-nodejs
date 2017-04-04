@@ -34,11 +34,11 @@ $(document).ready(function() {
 
                  // check if he need to be updated
                  // @@@@@@@@@@@@@@@@@@@@@@@@@@ -> need to change the time for the interval to be updated
-                 if (timeDifferenceInMinutes > 2) {
+                 if (timeDifferenceInMinutes > 1440) {
                     patientsRowConstructor.push("<span class=\"glyphicon glyphicon-warning-sign\" style=\"color: red;\"></span>   " + patient["firstName"] + " " + patient["lastName"]);
-               } else {
+                 } else {
                     patientsRowConstructor.push(patient["firstName"] + " " + patient["lastName"]);
-               }
+                 }
 
 
 			  if(patient["room"] === "noroom") {
@@ -81,11 +81,11 @@ $(document).ready(function() {
                     // iDataIndex - row index in the table
 
                    // color the Score field
-                   if (aData[2] >= 35) { // red
+                   if (aData[2] > 35) { // red
                        $('td:eq(2)', nRow).css("background-color", "#ffad99");
-                   } else if (aData[2] >=20) { // orange
+                   } else if (aData[2] >=25) { // orange
                        $('td:eq(2)', nRow).css("background-color", "#ffdd99");
-                   } else if (aData[2] >= 10) { // yellow
+                   } else if (aData[2] >= 5) { // yellow
                        $('td:eq(2)', nRow).css("background-color", "#ffffcc");
                    }
                }
