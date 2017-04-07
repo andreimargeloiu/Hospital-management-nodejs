@@ -59,7 +59,7 @@ $(document).ready(function() {
 		       	 title: "<span class=\"fa fa-hospital-o fa-fw\" style=\"color: black;\"></span>   " + "  no.",
                      width: "30%"
 		       }, {
-		           title: "Name",
+		           title: "Patients waiting",
                      width: "60%"
 		       }, {
 		           title: "Score",
@@ -97,7 +97,7 @@ $(document).ready(function() {
 	                title: "<span class=\"fa fa-hospital-o fa-fw\" style=\"color: black;\"></span>   " + "  no.",
                      width: "25%"
 	            },{
-	                title: "Name",
+	                title: "Patients with rooms",
                      width: "45%"
 	            },{
 	           	 title: "Room",
