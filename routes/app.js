@@ -15,11 +15,4 @@ router.get('/app', (req, res) => {
     res.status(200).render('dashboard');
 });
 
-/*
-    GET /app/addpatient -> go to addPatient page
-*/
-router.get('/app/addpatient', (req, res) => {
-    res.render('addpatient', {pageTitle: "Add patient"});
-});
-
 module.exports = router;

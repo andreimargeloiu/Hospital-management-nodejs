@@ -86,15 +86,15 @@ app.use(function (req, res, next) {
 /*
     Ensure authetification
 */
-app.use('/app', (req, res, next) => {
-    // check to be authentificated
-    if (req.isAuthenticated()) { // if yes, continue
-        return next();
-    } else {                     // if no, login
-        // req.flash('error_msg', 'You are not logged in');
-        res.redirect('/');
-    }
-});
+// app.use('/app', (req, res, next) => {
+//     // check to be authentificated
+//     if (req.isAuthenticated()) { // if yes, continue
+//         return next();
+//     } else {                     // if no, login
+//         // req.flash('error_msg', 'You are not logged in');
+//         res.redirect('/');
+//     }
+// });
 
 /*
     Website routes

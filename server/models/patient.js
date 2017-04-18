@@ -7,13 +7,11 @@ var rooms = require('./rooms.js');
 var PatientSchema = mongoose.Schema({
 	firstName: {
 		type: String,
-		required: true,
-		default: "No first name"
+		required: true
 	},
 	lastName: {
 		type: String,
-		required: true,
-		default: "No last name"
+		required: true
 	},
 	dateOfBirth: {
 		type: String,
@@ -29,8 +27,7 @@ var PatientSchema = mongoose.Schema({
 	hospitalNumber: {
 		type: String,
 		required: true,
-		unique: true,
-		default: 'noHospitalNumber'
+		unique: true
 	},
 	diseases: {
         type: Array,

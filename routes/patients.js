@@ -1,4 +1,5 @@
 /*
+     GET /app/addpatient -> go to addPatient page
      POST /app/addpatient                -> add a patient in the database
      GET  /app/getpatients               -> get a JSON with all patients
      GET  /app/patient/:hospitalNumber   -> get one patiente data
@@ -16,6 +17,14 @@ var {Patient} = require('./../server/models/patient.js');
 var {rooms, assignRoom, unassignRoom} = require('./../server/models/rooms.js');
 var isValidDate = require('is-valid-date');
 const {ObjectID} = require('mongodb');
+
+
+/*
+    GET /app/addpatient -> go to addPatient page
+*/
+router.get('/app/addpatient', (req, res) => {
+    res.render('addpatient', {pageTitle: "Add patient"});
+});
 
 /*
     POST /addPatient -> add new patient

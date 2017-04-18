@@ -7,8 +7,7 @@ var DiseaseSchema = mongoose.Schema({
     name: {
         type: String,
         unique: true,
-	   required: true,
-	   default: 'No disease name'
+	   required: true
     },
     score: {
         type: Number,
