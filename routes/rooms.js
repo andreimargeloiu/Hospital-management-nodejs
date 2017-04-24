@@ -34,17 +34,6 @@ router.get('/app/getrooms', (req, res) => {
     });
 });
 
-router.get('/app/getrooms2', (req, res) => {
-    Room.find({}, null, {sort: {name: 1}}).then((rooms) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).send(JSON.stringify(rooms));
-    }).catch((err) => {
-        console.log(err);
-        res.setHeader('Content-Type', 'application/json');
-        res.status(400).send(JSON.stringify({noroom: false}));
-    });
-});
-
 /*
     GET /app/updateroom -> update the room of one patient
 */

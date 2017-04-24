@@ -3,7 +3,6 @@
 
 	***Password are stored encrypted using Bcrypt algorithm.
 */
-
 const mongoose = require ('mongoose');
 const bcrypt = require ('bcryptjs');
 

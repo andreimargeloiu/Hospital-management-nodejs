@@ -1,6 +1,6 @@
 /*
  	POST /app/adduser -> add a new user in the system
-    GET /logout       -> log the user out of the system
+     GET /logout       -> log the user out of the system
 */
 
 const express = require('express');

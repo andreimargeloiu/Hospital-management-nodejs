@@ -3,9 +3,6 @@ var URL = location.protocol + '//' + location.host;
 $(document).ready(function() {
     var hospitalNumber= window.location.pathname.split('/');
 
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    // Change the index of the array NHSnumbr when giving into production
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     var patientAPI = URL + "/app/getpatient/" + hospitalNumber[3];
 
     $("#form-patient").attr("action", "/app/updatepatient/" + hospitalNumber[3]);

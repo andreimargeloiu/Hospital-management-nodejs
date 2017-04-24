@@ -14,7 +14,7 @@ const router = express.Router();
 
 var {scoreOfDisease, Disease} = require('./../server/models/diseases.js');
 var {Patient} = require('./../server/models/patient.js');
-var {rooms, assignRoom, unassignRoom} = require('./../server/models/rooms.js');
+var {rooms, Room} = require('./../server/models/rooms.js');
 var isValidDate = require('is-valid-date');
 const {ObjectID} = require('mongodb');
 
@@ -161,16 +161,28 @@ router.post('/app/updatepatient/:hospitalNumber', (req, res) => {
 router.get('/app/deletepatient/:hospitalNumber', (req, res) => {
     var hospitalNumber = req.params.hospitalNumber;
 
-    Patient.find({
-        hospitalNumber: hospitalNumber
-    }).remove().then((patients) => {
-        res.status(200).redirect('/app');
-    }).catch((err) => {
-        res.status(400).redirect('/app');
-    });
+    Promise.all([Room.find({}), Patient.findOne({hospitalNumber: hospitalNumber})])
+        .then((data) => {
+            var rooms = data[0];
+            var patient = data[1];
+
+            // if the patient is in a room, make the room empty
+            if (patient.room !== 'noroom') {
+                 for (var i = 0; i < rooms.length; ++i) {
+                    if (rooms[i].name === patient.room) {
+                         rooms[i].availability = false;
+                         rooms[i].save();
+                         break;
+                    }
+                 }
+            }
+
+            patient.remove().then((patients) => {
+               res.status(200).redirect('/app');
+            });
+         }).catch((err) => {
+            res.status(400).redirect('/app');
+         });
 });
-
-
-
 
 module.exports = router;
