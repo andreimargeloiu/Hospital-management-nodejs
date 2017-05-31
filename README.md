@@ -26,7 +26,7 @@ alt="Youtube video" width="240" height="180" border="10" /></a>
 9.	Now you should be inside the application
 
 # App Modules and Code organisation
-The app has four modules with different functionalities.
+###Modules
 
 Module|Core	|Patients|Diseases|Rooms 
 ------|-----|--------|--------|----
@@ -35,8 +35,7 @@ Functionality	|- login system | - add / delete patients | - add / delete disease
 .|- view dashboard	| - view patient’s page | 
 .|.| - retrieve patient's information	
 
-# 
-
+### Code organisation
 Folder | Content | Responsability
 ------|-----|--------
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
@@ -79,8 +78,10 @@ URI |	Returns
 /app/getrooms	| returns information about the rooms in the system
 
 # Known bugs
-Description
 1. On some mobiles devices (iPhone, iPad) assigning rooms to patients is not working because mobile browsers doesn’t interpret the double-click. Also, the user can’t enter the patient's page because of the same reason. However, on LG mobile devices this feature works. 
+
+# License
+Free to use, copy and distribute.
 
 
 
