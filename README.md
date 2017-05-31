@@ -25,42 +25,44 @@ alt="Youtube video" width="240" height="180" border="10" /></a>
 8.	To login use the username: admin  and the password: admin
 9.	Now you should be inside the application
 
-# System manual
-
-###
-C. System manual
-**The application is divided into modules.**
-
-
-**Code organisation**
+# Code organisation
 
 Folder | Content | Responsability
 -----------------|-----------------|-----------------
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
 /routes	| |	Manage the HTTP requests. Is divided into smaller modules responsible for disjoint tasks.
-.	| /app.js| 	Renders dashboard page
--	| /disease.js| 	Responsible for diseases
--	|/login.js|	Responsible for logging in
--	|/patients.js|	Responsible for patients
--	|/rooms.js|	Responsible for rooms
--	|/settings.js|	Renders settings page
--	|/users.js|	Add new users and logout
+.	|/app.js| 	Renders dashboard page
+.	|/disease.js| 	Responsible for diseases
+.	|/login.js|	Responsible for logging in
+.	|/patients.js|	Responsible for patients
+.	|/rooms.js|	Responsible for rooms
+.	|/settings.js|	Renders settings page
+.	|/users.js|	Add new users and logout
 /server	| |	Defines the database and Schemas
--	|/db/mongoose.js| 	Database settings
--	|/models| 	Defines Schemas
+.	|/db/mongoose.js| 	Database settings
+.	|/models| 	Defines Schemas
 /views		| |Render pages
--	|/layouts|	The core layout; each page is rendered inside the layout
--	|/(other files)|	Contains specific visual changes for every page
+.	|/layouts|	The core layout; each page is rendered inside the layout
+.	|/(other files)|	Contains specific visual changes for every page
 
+# Technologies
 
-The available application is connected to a MongoDB database online. If you want to change the database to another one, you need to go:
+### Backend
+
+### Frontend
+
+### Database
+
+**The available application is connected to a MongoDB database online.** If you want to change the database to another one, you need to go:
 NHS app folder -> server -> db -> mongoose.js
 
 Inside the file, you need to change the database link from
 mongoose.connect("mongodb://admin:admin123@ds145220.mlab.com:45220/nhs-app"); to mongoose.connect("your-database-link");
 
 ## REST Apis
-URI |	What returns
+The backend and frontend communicate through REST Apis. On the frontend, we make Ajax requests using jQuery to the following routes: 
+
+URI |	Returns
 ----|----
 /app/getdiseases |	returns information about all diseases in the system
 /app/getpatients |       	returns information about all patients in the system
