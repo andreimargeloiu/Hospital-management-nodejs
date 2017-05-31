@@ -38,27 +38,35 @@ Folder | Content | Responsability
 -----------------|-----------------|-----------------
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
 /routes	| |	Manage the HTTP requests. Is divided into smaller modules responsible for disjoint tasks.
-same	| /app.js| 	Renders dashboard page
-same	| /disease.js| 	Responsible for diseases
-same	|/login.js|	Responsible for logging in
-same	|/patients.js|	Responsible for patients
-same	|/rooms.js|	Responsible for rooms
-same	|/settings.js|	Renders settings page
-same	|/users.js|	Add new users and logout
+-	| /app.js| 	Renders dashboard page
+-	| /disease.js| 	Responsible for diseases
+-	|/login.js|	Responsible for logging in
+-	|/patients.js|	Responsible for patients
+-	|/rooms.js|	Responsible for rooms
+-	|/settings.js|	Renders settings page
+-	|/users.js|	Add new users and logout
 /server	| |	Defines the database and Schemas
-same	|/db/mongoose.js| 	Database settings
-same	|/models| 	Defines Schemas
+-	|/db/mongoose.js| 	Database settings
+-	|/models| 	Defines Schemas
 /views		| |Render pages
-same	|/layouts|	The core layout; each page is rendered inside the layout
-same	|/(other files)|	Contains specific visual changes for every page
+-	|/layouts|	The core layout; each page is rendered inside the layout
+-	|/(other files)|	Contains specific visual changes for every page
 
-Table 4.4 - Code organisation
 
 The available application is connected to a MongoDB database online. If you want to change the database to another one, you need to go:
 NHS app folder -> server -> db -> mongoose.js
 
 Inside the file, you need to change the database link from
 mongoose.connect("mongodb://admin:admin123@ds145220.mlab.com:45220/nhs-app"); to mongoose.connect("your-database-link");
+
+## REST Apis
+URI |	What returns
+----|----
+/app/getdiseases |	returns information about all diseases in the system
+/app/getpatients |       	returns information about all patients in the system
+ /app/getpatient/:hospitalNumber |	returns information about a specific patient
+/app/getrooms	| returns information about the rooms in the system
+
 
 
 
