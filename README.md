@@ -1,4 +1,4 @@
-# About Project
+# Description
 It's a web application for managing hospitals rooms and determining the patient's priority for isolation. The app provides a centralised hub for managing the patients and planning their distribution across hospital’s rooms. It allows nurses to keep track of the patients and their diseases in real time and to have an overview over the patients and rooms, and better manage the rooms assignment across patients.
 
 # Live demo
@@ -25,10 +25,20 @@ alt="Youtube video" width="240" height="180" border="10" /></a>
 8.	To login use the username: admin  and the password: admin
 9.	Now you should be inside the application
 
-# Code organisation
+# App Modules and Code organisation
+The app has four modules with different functionalities.
+
+Module	|Core	|Patients|Diseases|Rooms 
+-----------------|-----------------|-----------------|-----------------
+Functionality	|- login system | - add / delete patients | - add / delete diseases | 	- assign rooms to patients
+.|- add users | - update patient's diagnosis | - assign disease to patients | - add / remove rooms
+.|- view dashboard	| - view patient’s page | 
+.|.| - retrieve patient's information	
+
+# 
 
 Folder | Content | Responsability
------------------|-----------------|-----------------
+
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
 /routes	| |	Manage the HTTP requests. Is divided into smaller modules responsible for disjoint tasks.
 .	|/app.js| 	Renders dashboard page
@@ -66,7 +76,7 @@ URI |	Returns
 ----|----
 /app/getdiseases |	returns information about all diseases in the system
 /app/getpatients |       	returns information about all patients in the system
- /app/getpatient/:hospitalNumber |	returns information about a specific patient
+/app/getpatient/:hospitalNumber |	returns information about a specific patient
 /app/getrooms	| returns information about the rooms in the system
 
 
