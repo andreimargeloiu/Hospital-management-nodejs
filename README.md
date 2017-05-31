@@ -29,6 +29,7 @@ alt="Youtube video" width="240" height="180" border="10" /></a>
 
 # How to use it
 ###Dashboard
+
 Data about patients and rooms is available here. The page is split into three tables. 
 
 ![Dashboard](https://github.com/margiki/NHS-nodejs-webapp/blob/master/github_readme_photos/dashboard.jpg)
@@ -38,15 +39,18 @@ Data about patients and rooms is available here. The page is split into three ta
 To clear the red warning sign you need to go on the patient’s personal page. To do that, you have to double click on his name. By clicking on the ‘Update button’ on the bottom of the page, the patient’s diagnosis in updated for the next 24 hours (consequently, the red warning sign disappears).
 
 ###Add patient 
+
 You can add a new patient in the system with his personal details and his diseases. The application automatically computes the score of the patient based on the entered diseases
 
 ![Add patient page](https://github.com/margiki/NHS-nodejs-webapp/blob/master/github_readme_photos/add_new_patient.jpg)
 
 ###Patient page
+
 Double click on a patient name on the dashboard to get here.
 ![Patient page](https://github.com/margiki/NHS-nodejs-webapp/blob/master/github_readme_photos/patient_page.jpg)
 
 ###System settings
+
 The control center of the application. It allows users to manage the diseases & rooms of the Hospital and create new accounts
 
 ![System Settings](https://github.com/margiki/NHS-nodejs-webapp/blob/master/github_readme_photos/system_settings.jpg)
@@ -62,6 +66,7 @@ Functionality	|- login system | - add / delete patients | - add / delete disease
 .|.| - retrieve patient's information	
 
 ### Code organisation
+
 Folder | Content | Responsability
 ------|-----|--------
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
