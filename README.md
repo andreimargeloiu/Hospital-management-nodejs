@@ -38,19 +38,19 @@ Folder | Content | Responsability
 -----------------|-----------------|-----------------
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
 /routes	| |	Manage the HTTP requests. Is divided into smaller modules responsible for disjoint tasks.
-aa	| /app.js| 	Renders dashboard page
-a	| /disease.js| 	Responsible for diseases
-	|/login.js|	Responsible for logging in
-	|/patients.js|	Responsible for patients
-	|/rooms.js|	Responsible for rooms
-	|/settings.js|	Renders settings page
-	|/users.js|	Add new users and logout
+same	| /app.js| 	Renders dashboard page
+same	| /disease.js| 	Responsible for diseases
+same	|/login.js|	Responsible for logging in
+same	|/patients.js|	Responsible for patients
+same	|/rooms.js|	Responsible for rooms
+same	|/settings.js|	Renders settings page
+same	|/users.js|	Add new users and logout
 /server	| |	Defines the database and Schemas
-	|/db/mongoose.js| 	Database settings
-	|/models| 	Defines Schemas
+same	|/db/mongoose.js| 	Database settings
+same	|/models| 	Defines Schemas
 /views		| |Render pages
-	|/layouts|	The core layout; each page is rendered inside the layout
-	|/(other files)|	Contains specific visual changes for every page
+same	|/layouts|	The core layout; each page is rendered inside the layout
+same	|/(other files)|	Contains specific visual changes for every page
 
 Table 4.4 - Code organisation
 
