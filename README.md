@@ -16,23 +16,22 @@ https://nhs-app.herokuapp.com/
 alt="Youtube video" width="240" height="180" border="10" /></a>
 
 # Prerequisites
-1. Node.js 6.9.1 or later - install from https://nodejs.org/
+- [x] Node.js 6.9.1 or later - install from https://nodejs.org/
 
-# Installing - easy
-1.	Download the zip file.
+# Installing - easy :electric_plug:
+1.	Download the repository
 ```
 git clone https://github.com/margiki/NHS-nodejs-webapp
 ```
-2.	Extract the NHS app folder.
-3.	Open the Terminal (Linux & MacOS) or PowerShell (Windows) and change directory to the project folder.
-4.	Type ‘npm install’ in the Terminal (PowerShell) and press Enter. All the dependencies would be installed.
-5.	Go back to the Terminal (PowerShell) and be sure that you are pointing inside the project folder. To open the application, type ‘node app.js’ and press Enter.
-6.	The application should be live on the local port 3000.  
-7.	Type http://localhost:3000/ into a browser.
-8.	To login use the username: admin  and the password: admin
-9.	Now you should be inside the application
+2.	Open the Terminal (Linux & MacOS) or PowerShell (Windows) and change directory to the project folder.
+3.	Type ‘npm install’ in the Terminal (PowerShell) and press Enter. All the dependencies would be installed.
+4.	Go back to the Terminal (PowerShell) and be sure that you are pointing inside the project folder. To open the application, type ‘node app.js’ and press Enter.
+5.	The application should be live on the local port 3000.  
+6.	Type http://localhost:3000/ into a browser.
+7.	To login use the username: admin  and the password: admin
+8.	Now you should be inside the application
 
-# How to use it
+# How to use it :book:
 ### Dashboard
 
 Data about patients and rooms is available here. The page is split into three tables. 
@@ -43,7 +42,7 @@ Data about patients and rooms is available here. The page is split into three ta
 
 To clear the red warning sign you need to go on the patient’s personal page. To do that, you have to double click on his name. By clicking on the ‘Update button’ on the bottom of the page, the patient’s diagnosis in updated for the next 24 hours (consequently, the red warning sign disappears).
 
-### Add patient 
+### Add patient  
 
 You can add a new patient in the system with his personal details and his diseases. The application automatically computes the score of the patient based on the entered diseases
 
@@ -70,7 +69,7 @@ Functionality	|- login system | - add / delete patients | - add / delete disease
 .|- view dashboard	| - view patient’s page | 
 .|.| - retrieve patient's information	
 
-### Code organisation
+### Code organisation :open_file_folder:
 
 Folder | Content | Responsability
 ------|-----|--------
@@ -117,11 +116,11 @@ URI |	Returns
 /app/getpatient/:hospitalNumber |	returns information about a specific patient
 /app/getrooms	| returns information about the rooms in the system
 
-# Known bugs
+# Known bugs :bug:
 1. On some mobiles devices (iPhone, iPad) assigning rooms to patients is not working because mobile browsers doesn’t interpret the double-click. Also, the user can’t enter the patient's page because of the same reason. However, on LG mobile devices this feature works. 
 
-# License
-Free to use, copy and distribute.
+# License 
+Free to use, copy and distribute. :money_with_wings:
 
 
 
