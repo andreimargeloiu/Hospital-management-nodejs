@@ -35,6 +35,7 @@ C. System manual
 **Code organisation**
 
 Folder | Content | Responsability
+-----------------|-----------------|-----------------
 /public	| |	Contains the public files, such as CSS, fonts and scripts.
 /routes	| |	Manage the HTTP requests. Is divided into smaller modules responsible for disjoint tasks.
 	| /app.js| 	Renders dashboard page
